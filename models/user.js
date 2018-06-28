@@ -9,7 +9,7 @@ module.exports=(sequelize, DataTypes)=>{
         },
         image: {
             type: DataTypes.STRING,
-            defaultValue: "/assets/default.png"
+            defaultValue: "/img/default.png"
         },
         password: {
             type: DataTypes.STRING,
