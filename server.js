@@ -1,13 +1,15 @@
 //Dependencies
-var express = require('express');
-var bodyParser = require('body-parser');
+const express = require('express');
+const bodyParser = require('body-parser');
+const session = require('express-session');
 
-var app = express();
-var PORT = process.env.PORT || 8080;
 
-var db = require('./models');
+const app = express();
+const PORT = process.env.PORT || 8080;
 
-app.use(bodyPArser.urlencoded({
+const db = require('./models');
+
+app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
