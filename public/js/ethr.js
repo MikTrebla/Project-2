@@ -15,7 +15,6 @@ $(document).ready(() => {
         .trim()
     };
 
-    // Question: What does this code do??
     $.post("/register", user).then(data => {
       console.log("add user", data);
       window.location.replace("/");
