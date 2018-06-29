@@ -1,35 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-        <link rel="stylesheet" href="style.css" type="text/css" />
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-        <title>ETHR</title>
-	    <script src="https://code.jquery.com/jquery.js"></script>
-		<script src=""></script>
-	</head>
-	<body>
-        <div id="top-logo">
-            {{!-- <img src="header.png" alt="Logo"/> --}}
-        </div>
-        <div class="navbar">
-            {{!-- <img id="logo" src="" alt="Logo"> --}}
-            <div id="left_nav">
-                <a href="#">Home</a>
-                <a href="#">Link</a>
-                <a href="#">Link</a>
-                <a href="#">Link</a>
-            </div>
 
-            <div id="right_nav">
-                <form action="#">
-                    <input id="search_bar" type="text" placeholder="Search">
-                    <button id="search_btn" type="submit"><i id="search_icon" class="fas fa-search"></i></button>
-                </form>
-            </div>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>ETHR</title>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src=""></script>
+<link href="https://fonts.googleapis.com/css?family=Teko" rel="stylesheet">
+</head>
+
+<body>
+    <div id="top-logo">        
+        <img src="header.png" alt="Logo" />
+    </div>
+
+    <div class="navbar">
+
+        <div id="left_nav">
+            <a class="leftNav" href="#">Home</a>
+            <a class="leftNav" href="#">Link</a>
+            <a class="leftNav" href="#">Link</a>
+            <a class="leftNav" href="#">Link</a>
         </div>
-        
-		{{{ body }}}
+
+        <div id="right_nav">
+            <form action="#">
+                <input id="search_bar" type="text" placeholder="Search">
+                <button id="search_btn" type="submit">
+                    <i id="search_icon" class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+        {{{ body }}}
 	</body>
 </html>
