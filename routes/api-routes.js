@@ -35,6 +35,16 @@ module.exports = function (app) {
     // app.get('/api/game/:id', (req, res) => {
 
     // });
+        app.get("/user/:screen_name", (req, res)=>{
+           db.User.findOne({
+               where:{
+                   screen_name: req.params.screen_name
+               }
+           }).then((response)=>{
+               res.render("profile", response);
+           })
+
+    });
 
     // app.get('/api/review/:id', (req, res) => {
 
@@ -73,6 +83,10 @@ module.exports = function (app) {
         })
     });
 
+    app.get('/register', (req, res) => {
+       res.render('register');
+   })
+
     //////////check if user is logged into current session when attempting to submit reviews//////////
 
     // app.get('/checklogin', (req, res) => { 
@@ -90,7 +104,7 @@ module.exports = function (app) {
 
     // });
 
-    app.post('/register', (req, res) => {
+       app.post('/register', (req, res) => {
         db.User.findOne({
             where: {
                 screen_name: req.body.screen_name
@@ -112,10 +126,6 @@ module.exports = function (app) {
             };
         });
     });
-
-
-
-
 
 
 
