@@ -18,14 +18,15 @@ module.exports=(sequelize, DataTypes)=>{
         
     });
 
-    Token.associate = (models)=>{
-        User.belongsToMany(models.User, {
-            through: "user2game"
+    Token.associate = function(models) {
+        // We're saying that a Post should belong to an Author
+        // A Post can't be created without an Author due to the foreign key constraint
+        Token.belongsTo(models.User, {
+          foreignKey: {
+            allowNull: false
+          }
         });
-        User.hasMany(models.Post, {
-            onDelete: "cascade"
-        })
-    }
-
-    return Token;
-};
+      };
+    
+      return Token;
+    };
