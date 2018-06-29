@@ -6,14 +6,13 @@ const client = igdb('1ef55fd89628c4844a334b3bee9b4194');
 
 
 module.exports = function (app) {
-//
+    //
     app.get('/', (req, res) => {
         client.games({
                 fields: 'name', // Return all fields
                 limit: 5, // Limit to 5 results
                 offset: 15, // Index offset for results
                 search: "halo"
-
             }, [
                 "name",
                 "release_dates.date",
@@ -52,7 +51,6 @@ module.exports = function (app) {
         db.User.findOne({
             where: {
                 screen_name: req.body.screen_name,
-                password: req.body.password
             }
         }).then((results) => {
             if (results.screen_name === req.body.screen_name && encrypt.decrypt(results.password) === req.body.password) {
