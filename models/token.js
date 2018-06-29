@@ -1,25 +1,25 @@
 module.exports=(sequelize, DataTypes)=>{
-    var User = sequelize.define("User", {
-        screen_name: {
+    var Token = sequelize.define("Token", {
+        user_name: {
             type: DataTypes.STRING,
             allowNull: false,
             validate:{
                 len:[1]
             }
         },
-        image: {
-            type: DataTypes.STRING,
-            defaultValue: "/img/default.png"
-        },
         password: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
+        },
+        token: {
+            type: DataTypes.STRING,
+            allowNull: true,
         }
         
     });
 
-    User.associate = (models)=>{
-        User.belongsToMany(models.Game, {
+    Token.associate = (models)=>{
+        User.belongsToMany(models.User, {
             through: "user2game"
         });
         User.hasMany(models.Post, {
@@ -27,5 +27,5 @@ module.exports=(sequelize, DataTypes)=>{
         })
     }
 
-    return User;
+    return Token;
 };
