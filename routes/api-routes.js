@@ -6,7 +6,7 @@ const client = igdb('1ef55fd89628c4844a334b3bee9b4194');
 
 
 module.exports = function (app) {
-
+//
     app.get('/', (req, res) => {
         client.games({
                 fields: 'name', // Return all fields
