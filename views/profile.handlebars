@@ -1,0 +1,26 @@
+<div class="wrapper">
+        <div class="user">
+            <h1 class="name"><u>{{user.name}}</u></h1>
+            <img id="profilePic" src={{user.image}}>
+            <hr>
+
+            <div id="gameView">
+                <h2 class="title"><u>Games</u></h2>
+                
+                {{#each games}}
+                <img class="gamePreview" src={{game.image}}>
+                <br>
+                <br>
+                {{/each}}
+            </div>
+        </div>
+
+        <div class="reviews">
+            <h1><u>Reviews from {{user.name}}</u></h1>
+
+        </div>
+
+    </div>
+
+    </div>
+

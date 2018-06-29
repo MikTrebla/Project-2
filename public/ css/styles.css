@@ -1,5 +1,6 @@
 body {
     background-color: #333;
+
 }
 
 img {
@@ -15,6 +16,7 @@ img {
     border-top-right-radius: 5px;
 }
 
+
 .navbar {
     background-color: rgb(34, 34, 34);
     overflow: hidden;
@@ -29,7 +31,8 @@ img {
     padding: 20px 35px;
     text-decoration: none;
     font-size: 20px;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Teko', sans-serif;
+
 }
 
 .navbar a:hover {
@@ -70,6 +73,58 @@ img {
     border-radius: 25px; 
 }
 
+#left_nav {
+    padding-left: 17%;
+}
+
 #right_nav {
     float: right;
+    padding-right:17%;
+}
+
+.name{
+    font-family: 'Teko', sans-serif;
+    color:#e2e2e2;
+}
+
+.title{
+    font-family: 'Teko', sans-serif;
+    color:#e2e2e2;
+    width:200px;
+}
+
+.user{
+    width:250px;
+    background-color:#191919;
+    text-align: center;
+    border:1px solid #e2e2e2;
+    display:inline-block;
+}
+.gamePreview{
+    width:200px;
+}
+
+#profilePic{
+    width:200px;
+    height:auto;
+}
+
+#gameView{
+    width:250px;
+}
+
+.wrapper{
+    width:65%;
+    margin:auto;
+    display:flex;
+}
+
+.reviews{
+    background-color:#191919;
+    color:#e2e2e2;
+    border:1px solid #e2e2e2;
+    width:75%;
+    padding-left:10px;
+    font-family: 'Teko', sans-serif;
+    font-size:x-large;
 }
