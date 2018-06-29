@@ -21,7 +21,7 @@ module.exports = function (app) {
             ])
             .then(response => {
                 // response.body contains the parsed JSON response to this query
-                res.json(response);
+                res.render("index");
                 //res.render('index', response);
             }).catch(error => {
                 throw error;
@@ -39,7 +39,10 @@ module.exports = function (app) {
     // app.get('/api/review/:id', (req, res) => {
 
     // });
-
+    app.get("/signin", (req, res)=>{
+        console.log("loading");
+        res.render("signin");
+    });
     // app.post('/api/reviews', (req, res) => {
 
     // });
