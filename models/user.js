@@ -14,12 +14,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate:{
+        len: [8]
+      }
     },
 
     routeName: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    token: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   });
   User.associate = models => {
