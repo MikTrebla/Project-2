@@ -21,7 +21,7 @@ module.exports = function (app) {
             ])
             .then(response => {
                 // response.body contains the parsed JSON response to this query
-                res.render("index");
+                res.render("index", response);
                 //res.render('index', response);
             }).catch(error => {
                 throw error;
@@ -96,8 +96,7 @@ module.exports = function (app) {
                 screen_name: req.body.screen_name
             }
         }).then((result) => {
-            console.log(result);
-            if (result.screen_name === req.body.screen_name) {
+            if (result) {
                 return res.send('Sorry, this username is already taken! Please choose another.')
             } else {
                 db.User.create({
