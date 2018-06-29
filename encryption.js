@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }))
 app.use(bodyParser.json());
+
 app.use(session({
     secret: 'whateverWeWant', //can be whatever you want it to set it to
     resave: false, //typically should stay false

@@ -35,14 +35,14 @@ module.exports = function (app) {
     // app.get('/api/game/:id', (req, res) => {
 
     // });
-        app.get("/user/:screen_name", (req, res)=>{
-           db.User.findOne({
-               where:{
-                   screen_name: req.params.screen_name
-               }
-           }).then((response)=>{
-               res.render("profile", response);
-           })
+    app.get("/user/:screen_name", (req, res) => {
+        db.User.findOne({
+            where: {
+                screen_name: req.params.screen_name
+            }
+        }).then((response) => {
+            res.render("profile", response);
+        })
 
     });
 
@@ -57,24 +57,28 @@ module.exports = function (app) {
     app.get('/register', (req, res) => {
         res.render('register');
     })
-    // app.post('/api/reviews', (req, res) => {
 
-    // });
+    app.post('/reviews/:id', (req, res) => {
+
+    });
 
     app.post('/signin', (req, res) => {
-        var userPW = db.User.password;
-        var decryptPW = encrypt.decrypt(userPW);
+        // var userPW = db.User.password;
+        // var decryptPW = encrypt.decrypt(userPW);
+        console.log(req.session)
 
         db.User.findOne({
             where: {
                 screen_name: req.body.screen_name,
+                // password : req.body.password
             }
         }).then((results) => {
+            // console.log(results);
             if (results.screen_name === req.body.screen_name && encrypt.decrypt(results.password) === req.body.password) {
                 var token = 't' + Math.random();
-                db.User[i].token = token;
+                results.token = token;
                 res.cookie('token', token);
-                req.session.user = results.User;
+                req.session.user = results;
                 return res.render('profile', results)
 
             } else {
@@ -84,8 +88,8 @@ module.exports = function (app) {
     });
 
     app.get('/register', (req, res) => {
-       res.render('register');
-   })
+        res.render('register');
+    })
 
     //////////check if user is logged into current session when attempting to submit reviews//////////
 
@@ -104,7 +108,7 @@ module.exports = function (app) {
 
     // });
 
-       app.post('/register', (req, res) => {
+    app.post('/register', (req, res) => {
         db.User.findOne({
             where: {
                 screen_name: req.body.screen_name

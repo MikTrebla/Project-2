@@ -14,11 +14,22 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
+app.use(session({
+    secret: 'whateverWeWant', //can be whatever you want it to set it to
+    resave: false, //typically should stay false
+    saveUninitialized: true, //
+    cookie: {
+        secure: 'auto',
+        maxAge: 99999
+    }
+}))
 
 //Static directory
 app.use(express.static('public'));
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({
+    defaultLayout: "main"
+}));
 app.set("view engine", "handlebars");
 
 //Routes
@@ -28,7 +39,9 @@ require('./routes/html-routes.js')(app);
 
 
 
-db.sequelize.sync({force:false}).then(function () {
+db.sequelize.sync({
+    force: false
+}).then(function () {
     app.listen(PORT, function () {
         console.log('App listening on PORT ' + PORT)
     });
