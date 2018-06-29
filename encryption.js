@@ -5,6 +5,21 @@ const crypto = require('crypto');
 const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || "qw~rty+iop$kjhg5dsazx!vbnm*wert5" // Must be 256 bytes (32 characters)
 const IV_LENGTH = 16; // For AES, this is always 16
 
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}))
+app.use(bodyParser.json());
+app.use(session({
+    secret: 'whateverWeWant', //can be whatever you want it to set it to
+    resave: false, //typically should stay false
+    saveUninitialized: true, //
+    cookie: {
+        secure: 'auto',
+        maxAge: 99999
+    }
+}))
+
 function encrypt(text) {
     let iv = crypto.randomBytes(IV_LENGTH);
     let cipher = crypto.createCipheriv('aes-256-cbc', new Buffer(ENCRYPTION_KEY), iv);
