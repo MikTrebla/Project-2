@@ -2,7 +2,8 @@ $(document).ready(() => {
   console.log("ready!");
 
   $("#register").click(event => {
-    event.preventDefault();
+
+    // event.preventDefault();
     var user = {
       screen_name: $("#screenName")
         .val()
@@ -14,6 +15,7 @@ $(document).ready(() => {
         .val()
         .trim()
     };
+    console.log(event);
 
     // Question: What does this code do??
     $.post("/register", user).then(data => {
@@ -25,15 +27,11 @@ $(document).ready(() => {
   $("#signin").click(event => {
     event.preventDefault();
     var user = {
-      screen_name: $("#screenName")
-        .val()
-        .trim(),
-      password: $("password")
-        .val()
-        .trim()
+      screen_name: $("#screenName").val().trim(),
+      password: $("#password").val().trim()
     };
 
-    $.post("/login", user);
+    $.post("/signin", user);
   });
 });
 

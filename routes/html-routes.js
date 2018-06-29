@@ -5,16 +5,20 @@ module.exports = function (app) {
 
 
     app.get('/', (req, res) => {
-        res.sendFile(path.join(__dirname, ".."));
+        res.sendFile(path.join(__dirname, "../views"));
     });
 
     app.get('/user/:id', (req, res) => {
-        res.sendFile(path.join(__dirname, ""));
+        res.sendFile(path.join(__dirname, "../views/profile"));
     });
 
-    app.get('/', (req, res) => {
-        res.sendFile(path.join(__dirname, ""));
+    app.get('/signin', (req, res) => {
+        res.sendFile(path.join(__dirname, "../views/signin"));
     });
+
+    // app.get('/register', (req, res) => {
+    //     res.sendFile(path.join(__dirname, "../views/register"));
+    // });
 
 
 }

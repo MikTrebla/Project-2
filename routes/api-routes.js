@@ -39,15 +39,19 @@ module.exports = function (app) {
     // app.get('/api/review/:id', (req, res) => {
 
     // });
-    app.get("/signin", (req, res)=>{
+    app.get("/signin", (req, res) => {
         console.log("loading");
         res.render("signin");
     });
+
+    app.get('/register', (req, res) => {
+        res.render('register');
+    })
     // app.post('/api/reviews', (req, res) => {
 
     // });
 
-    app.post('/login', (req, res) => {
+    app.post('/signin', (req, res) => {
         var userPW = db.User.password;
         var decryptPW = encrypt.decrypt(userPW);
 
@@ -89,10 +93,11 @@ module.exports = function (app) {
     app.post('/register', (req, res) => {
         db.User.findOne({
             where: {
-                username: req.body.username
+                screen_name: req.body.screen_name
             }
         }).then((result) => {
-            if (result.username) {
+            console.log(result);
+            if (result.screen_name === req.body.screen_name) {
                 return res.send('Sorry, this username is already taken! Please choose another.')
             } else {
                 db.User.create({
