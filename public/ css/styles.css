@@ -1,6 +1,5 @@
 body {
     background-color: #333;
-
 }
 
 img {
@@ -16,7 +15,6 @@ img {
     border-top-right-radius: 5px;
 }
 
-
 .navbar {
     background-color: rgb(34, 34, 34);
     overflow: hidden;
@@ -31,8 +29,7 @@ img {
     padding: 20px 35px;
     text-decoration: none;
     font-size: 20px;
-    font-family: 'Teko', sans-serif;
-
+    font-family: "Teko", sans-serif;
 }
 
 .navbar a:hover {
@@ -41,10 +38,10 @@ img {
 }
 
 #search_bar {
-    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+    font-family: "Gill Sans", "Gill Sans MT", "Calibri", "Trebuchet MS", sans-serif;
     background: #333;
     margin: 15px 5px;
-    padding:5px;
+    padding: 5px;
     width: 180px;
     height: 15px;
     border: 2px solid rgb(65, 65, 65);
@@ -68,9 +65,9 @@ img {
     margin-right: 15px;
     width: 35px;
     height: 24px;
-    border:0 none;
-    cursor:pointer;
-    border-radius: 25px; 
+    border: 0 none;
+    cursor: pointer;
+    border-radius: 25px;
 }
 
 #left_nav {
@@ -79,52 +76,53 @@ img {
 
 #right_nav {
     float: right;
-    padding-right:17%;
+    padding-right: 17%;
 }
 
-.name{
-    font-family: 'Teko', sans-serif;
-    color:#e2e2e2;
+.name {
+    font-family: "Teko", sans-serif;
+    color: #e2e2e2;
 }
 
-.title{
-    font-family: 'Teko', sans-serif;
-    color:#e2e2e2;
-    width:200px;
+.title {
+    font-family: "Teko", sans-serif;
+    color: #e2e2e2;
+    width: 200px;
 }
 
-.user{
-    width:250px;
-    background-color:#191919;
+.user {
+    width: 250px;
+    background-color: #191919;
     text-align: center;
-    border:1px solid #e2e2e2;
-    display:inline-block;
-}
-.gamePreview{
-    width:200px;
+    border: 1px solid #e2e2e2;
+    display: inline-block;
 }
 
-#profilePic{
-    width:200px;
-    height:auto;
+.gamePreview {
+    width: 200px;
 }
 
-#gameView{
-    width:250px;
+#profilePic {
+    width: 200px;
+    height: auto;
 }
 
-.wrapper{
-    width:65%;
-    margin:auto;
-    display:flex;
+#gameView {
+    width: 250px;
 }
 
-.reviews{
-    background-color:#191919;
-    color:#e2e2e2;
-    border:1px solid #e2e2e2;
-    width:75%;
-    padding-left:10px;
-    font-family: 'Teko', sans-serif;
-    font-size:x-large;
+.wrapper {
+    width: 65%;
+    margin: auto;
+    display: flex;
+}
+
+.reviews {
+    background-color: #191919;
+    color: #e2e2e2;
+    border: 1px solid #e2e2e2;
+    width: 75%;
+    padding-left: 10px;
+    font-family: "Teko", sans-serif;
+    font-size: x-large;
 }
