@@ -46,9 +46,22 @@ module.exports = function (app) {
 
     });
 
-    // app.get('/api/review/:id', (req, res) => {
+    app.get('/createreview', (req, res) => {
+        res.render('', res);
+    });
 
-    // });
+    app.post('/review/:id', (req, res) => {
+        db.Post.create({
+            body: req.body.body
+        }).then((result) => {
+            res.send(result);
+        });
+    });
+
+    app.get('/review/:id', (req, res) => {
+
+    });
+
     app.get("/signin", (req, res) => {
         console.log("loading");
         res.render("signin");
@@ -58,22 +71,16 @@ module.exports = function (app) {
         res.render('register');
     })
 
-    app.post('/reviews/:id', (req, res) => {
 
-    });
 
     app.post('/signin', (req, res) => {
-        // var userPW = db.User.password;
-        // var decryptPW = encrypt.decrypt(userPW);
         console.log(req.session)
 
         db.User.findOne({
             where: {
                 screen_name: req.body.screen_name,
-                // password : req.body.password
             }
         }).then((results) => {
-            // console.log(results);
             if (results.screen_name === req.body.screen_name && encrypt.decrypt(results.password) === req.body.password) {
                 var token = 't' + Math.random();
                 results.token = token;

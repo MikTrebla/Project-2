@@ -16,15 +16,7 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json());
 
-app.use(session({
-    secret: 'whateverWeWant', //can be whatever you want it to set it to
-    resave: false, //typically should stay false
-    saveUninitialized: true, //
-    cookie: {
-        secure: 'auto',
-        maxAge: 99999
-    }
-}))
+
 
 function encrypt(text) {
     let iv = crypto.randomBytes(IV_LENGTH);
