@@ -10,11 +10,11 @@ module.exports = function (app) {
     //
     app.get('/', (req, res) => {
         client.games({
-                fields: 'name', // Return all fields
-                limit: 5, // Limit to 5 results
-                offset: 15, // Index offset for results
-                search: "halo"
-            }, [
+            fields: 'name', // Return all fields
+            limit: 5, // Limit to 5 results
+            offset: 15, // Index offset for results
+            search: "halo"
+        }, [
                 "name",
                 "release_dates.date",
                 "rating",
@@ -36,40 +36,42 @@ module.exports = function (app) {
     // app.get('/api/game/:id', (req, res) => {
 
     // });
-        app.get("/user/:screen_name", (req, res)=>{
-           db.User.findOne({ 
-               where:{
-                   screen_name: req.params.screen_name
-               }
-           }).then((data)=>{
-               var userInfo = data.dataValues;
+    app.get("/user/:screen_name", (req, res) => {
+        db.User.findOne({
+            where: {
+                screen_name: req.params.screen_name
+            }
+        }).then((data) => {
+            var userInfo = data.dataValues;
             //    console.log(data);
-               console.log(data.dataValues);
-            //    res.json(response);
-               res.render("profile",userInfo);
-           })
+            //    console.log(data.dataValues);
+            //    res.json(userInfo);
+            res.render("profile", userInfo);
+        })
 
     });
 
-        app.get("/user/:screen_name", (req, res)=>{
-           db.user2game.findOne({ 
-               where:{
-                   screen_name: req.params.screen_name
-               }
-           }).then((data)=>{
-               var userInfo = data.dataValues;
+    app.get("/user/:screen_name", (req, res) => {
+        db.User.findOne({
+            where: {
+                screen_name: req.params.screen_name
+            },
+            //    include: [db.Review],
+            //    include: [db.user2game]
+        }).then((data) => {
+            var userInfo = data.dataValues;
             //    console.log(data);
-               console.log(data.dataValues);
-            //    res.json(response);
+            //    console.log(data.dataValues);
+            // res.json(userInfo);
                res.render("profile",userInfo);
-           })
+        })
 
     });
 
     // app.get('/api/review/:id', (req, res) => {
 
     // });
-    app.get("/login", (req, res)=>{
+    app.get("/login", (req, res) => {
         console.log("loading");
         res.render("signin");
     });
@@ -100,8 +102,8 @@ module.exports = function (app) {
     });
 
     app.get('/register', (req, res) => {
-       res.render('register');
-   })
+        res.render('register');
+    })
 
     //////////check if user is logged into current session when attempting to submit reviews//////////
 
@@ -120,7 +122,7 @@ module.exports = function (app) {
 
     // });
 
-       app.post('/register', (req, res) => {
+    app.post('/register', (req, res) => {
         db.User.findOne({
             where: {
                 screen_name: req.body.screen_name
@@ -128,7 +130,19 @@ module.exports = function (app) {
         }).then((result) => {
             if (result) {
                 return res.send('Sorry, this username is already taken! Please choose another.')
-            } else {
+            }
+            else if (req.body.image === "") {
+                db.User.create({
+                    screen_name: req.body.screen_name,
+                    password: encrypt.encrypt(req.body.password),
+                    routeName: req.body.screen_name.replace(/\s+/g, "").toLowerCase(),
+                }).then((response) => {
+                    res.json(response);
+                }).catch((error) => {
+                    res.json(error);
+                })
+            }
+            else {
                 db.User.create({
                     screen_name: req.body.screen_name,
                     password: encrypt.encrypt(req.body.password),
@@ -142,7 +156,5 @@ module.exports = function (app) {
             };
         });
     });
-
-
 
 }
