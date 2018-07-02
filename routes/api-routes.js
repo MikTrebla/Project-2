@@ -150,7 +150,6 @@ module.exports = function (app) {
 
     // app.get('/logout', (req, res) => {
 
-<<<<<<< HEAD
     // });
 
 
@@ -159,13 +158,5 @@ module.exports = function (app) {
     //     res.render('index')
     // });
 
-=======
-
-
-    // app.get('/logout', (req, res) => {
-    //     res.render('index')
-    // });
-
->>>>>>> userhandlebars2
 
 }
