@@ -31,7 +31,6 @@ $(document).ready(() => {
   $("#signin").click((event) => {
     event.preventDefault();
     var user = {
-<<<<<<< HEAD
       screen_name: $("#screenName")
         .val()
         .trim(),
@@ -49,13 +48,6 @@ $(document).ready(() => {
         window.location.replace("/profile");
       }
     });
-=======
-      screen_name: $("#screen_name").val().trim(),
-      password: $("#password").val().trim()
-    };
-
-    $.post("/signin", user);
->>>>>>> userhandlebars2
   });
 
 });
