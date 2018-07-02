@@ -1,3 +1,4 @@
+<div id="main-body">
 <div class="wrapper">
     <div class="user">
         <h1 class="name">
@@ -22,11 +23,16 @@
         <h1>
             <u>Reviews from {{screen_name}}</u>
         </h1>
-            {{#each posts}}
-            {{>posts/posts-block}}
-            {{/each}}
+        {{#each Posts}}
+            {{title}}
+            <hr>
+            {{body}}
+            <br>
+            <button class="delete-post" data-id="{{this.id}}">Delete Review</button>
+        {{/each}}
     </div>
 
 </div>
 
+</div>
 </div>

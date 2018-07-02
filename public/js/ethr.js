@@ -26,26 +26,11 @@ $(document).ready(() => {
   $("#signin").click(event => {
     event.preventDefault();
     var user = {
-<<<<<<< HEAD
-      screen_name: $("#screenName").val().trim(),
+      screen_name: $("#screen_name").val().trim(),
       password: $("#password").val().trim()
     };
 
     $.post("/signin", user);
-=======
-      screen_name: $("#screenName")
-        .val()
-        .trim(),
-      password: $("#password")
-        .val()
-        .trim()
-    };
-
-    $.post("/register", user).then(data => {
-      console.log("logging in user", data);
-      window.location.replace("/");
-    });
->>>>>>> userapi1
   });
 
 });

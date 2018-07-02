@@ -35,33 +35,23 @@ module.exports = function(app) {
   // app.get('/api/game/:id', (req, res) => {
 
   // });
-  app.get("/user/:screen_name", (req, res) => {
-    db.User.findOne({
-      where: {
-        screen_name: req.params.screen_name
-      }
-    }).then(data => {
-      var userInfo = data.dataValues;
-      //    console.log(data);
-      //    console.log(data.dataValues);
-      //    res.json(userInfo);
-      res.render("profile", userInfo);
-    });
-  });
 
   app.get("/user/:screen_name", (req, res) => {
     db.User.findOne({
       where: {
         screen_name: req.params.screen_name
       },
-    //   include: [db.Post
+      include: [db.Post
         // { model: db.user2game, include: [{ model: db.game }] }
-    //   ]
+      ]
     }).then(data => {
       var userInfo = data.dataValues;
-      //    console.log(data);
-      //    console.log(data.dataValues);
-      // res.json(userInfo);
+      var body = userInfo.Posts.body;
+      Handlebars.registerHelper('trimString', function(body) {
+      var theString = body.substring(0,150);
+      return new Handlebars.SafeString(theString);
+});
+
       res.render("profile", userInfo);
     });
   });
@@ -69,7 +59,7 @@ module.exports = function(app) {
   // app.get('/api/review/:id', (req, res) => {
 
   // });
-  app.get("/login", (req, res) => {
+  app.get("/signin", (req, res) => {
     console.log("loading");
     res.render("signin");
   });
@@ -77,7 +67,7 @@ module.exports = function(app) {
 
   // });
 
-  app.post("/login", (req, res) => {
+  app.post("/signin", (req, res) => {
     var userPW = db.User.password;
     // var decryptPW = encrypt.decrypt(userPW);
 
