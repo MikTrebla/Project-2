@@ -46,11 +46,6 @@ module.exports = function(app) {
       ]
     }).then(data => {
       var userInfo = data.dataValues;
-      var body = userInfo.Posts.body;
-      Handlebars.registerHelper('trimString', function(body) {
-      var theString = body.substring(0,150);
-      return new Handlebars.SafeString(theString);
-});
 
       res.render("profile", userInfo);
     });
@@ -59,104 +54,86 @@ module.exports = function(app) {
   // app.get('/api/review/:id', (req, res) => {
 
   // });
-  app.get("/signin", (req, res) => {
-    console.log("loading");
-    res.render("signin");
-  });
-  // app.post('/api/reviews', (req, res) => {
-
-  // });
-
-  app.post("/signin", (req, res) => {
-    var userPW = db.User.password;
-    // var decryptPW = encrypt.decrypt(userPW);
-
-    db.User.findOne({
-      where: {
-        screen_name: req.body.screen_name
-      }
-    }).then(results => {
-      if (
-        results.screen_name === req.body.screen_name &&
-        encrypt.decrypt(results.password) === req.body.password
-      ) {
-        var token = "t" + Math.random();
-        db.User[i].token = token;
-        res.cookie("token", token);
-        req.session.user = results.User;
-        return res.render("profile", results);
-      } else {
-        return res.send("Sorry, account was not found.");
-      }
+ 
+    app.get("/signin", (req, res) => {
+        res.render("signin");
     });
-  });
 
-  app.get("/register", (req, res) => {
-    res.render("register");
-  });
+    app.post('/signin', (req, res) => {
+        console.log(req.session)
 
-  //////////check if user is logged into current session when attempting to submit reviews//////////
+        db.User.findOne({
+            where: {
+                screen_name: req.body.screen_name,
+            }
+        }).then(results => {
+            if (results.screen_name === req.body.screen_name && encrypt.decrypt(results.password) === req.body.password) {
+                var token = 't' + Math.random();
+                results.token = token;
+                res.cookie('token', token);
+                req.session.user = results;
+                results.update({
+                    token: token,
+                    where: {
+                        screen_name: req.body.screen_name
+                    },
+                }).then(response => {
+                    return res.render('profile', response)
+                });
 
-  // app.get('/checklogin', (req, res) => {
-  //     if (req.session.user) {
-  //         res.send(`Oh hi, it's ${req.session.user.name} again!`)
-  //     } else {
-  //         res.redirect('/login');
-  //     }
-  // });
-
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-
-  // app.get('/logout', (req, res) => {
-
-  // });
-
-  app.post("/register", (req, res) => {
-    db.User.findOne({
-      where: {
-        screen_name: req.body.screen_name
-      }
-    }).then(result => {
-      if (result) {
-        return res.send(
-          "Sorry, this username is already taken! Please choose another."
-        );
-      } else if (req.body.image === "") {
-        db.User.create({
-          screen_name: req.body.screen_name,
-          password: encrypt.encrypt(req.body.password),
-          routeName: req.body.screen_name.replace(/\s+/g, "").toLowerCase()
+            } else {
+                return res.send('Sorry, account was not found.')
+            }
         })
-          .then(response => {
-            res.json(response);
-          })
-          .catch(error => {
-            res.json(error);
-          });
-      } else {
-        db.User.create({
-          screen_name: req.body.screen_name,
-          password: encrypt.encrypt(req.body.password),
-          routeName: req.body.screen_name.replace(/\s+/g, "").toLowerCase(),
-          image: req.body.image
-        })
-          .then(response => {
-            res.json(response);
-          })
-          .catch(error => {
-            res.json(error);
-          });
-      }
     });
-  });
 
-    app.get('/register', (req, res) => {
-        res.render('register');
+    app.get("/register", (req, res) => {
+        res.render("register");
     });
+
+    app.post("/register", (req, res) => {
+        db.User.findOne({
+            where: {
+                screen_name: req.body.screen_name
+            }
+        }).then(result => {
+            if (result) {
+                return res.send(
+                    "Sorry, this username is already taken! Please choose another."
+                );
+            } else if (req.body.image === "") {
+                db.User.create({
+                        screen_name: req.body.screen_name,
+                        password: encrypt.encrypt(req.body.password),
+                        routeName: req.body.screen_name.replace(/\s+/g, "").toLowerCase()
+                    })
+                    .then(response => {
+                        res.json(response);
+                    })
+                    .catch(error => {
+                        res.json(error);
+                    });
+            } else {
+                db.User.create({
+                        screen_name: req.body.screen_name,
+                        password: encrypt.encrypt(req.body.password),
+                        routeName: req.body.screen_name.replace(/\s+/g, "").toLowerCase(),
+                        image: req.body.image
+                    })
+                    .then(response => {
+                        res.json(response);
+                    })
+                    .catch(error => {
+                        res.json(error);
+                    });
+            }
+        });
+    });
+
 
     //////////check if user is logged into current session when attempting to submit reviews//////////
 
-    // app.get('/checklogin', (req, res) => { 
+    // app.get('/checklogin', (req, res) => {
     //     if (req.session.user) {
     //         res.send(`Oh hi, it's ${req.session.user.name} again!`)
     //     } else {
@@ -167,31 +144,11 @@ module.exports = function(app) {
     //////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    app.get('/logout', (req, res) => {
-        res.render('index')
-    });
 
-    app.post('/register', (req, res) => {
-        db.User.findOne({
-            where: {
-                screen_name: req.body.screen_name
-            }
-        }).then((result) => {
-            if (result) {
-                return res.send('Sorry, this username is already taken! Please choose another.')
-            } else {
-                db.User.create({
-                    screen_name: req.body.screen_name,
-                    password: encrypt.encrypt(req.body.password),
-                    routeName: req.body.screen_name.replace(/\s+/g, "").toLowerCase(),
-                    image: req.body.image
-                }).then((response) => {
-                    res.json(response);
-                }).catch((error) => {
-                    res.json(error);
-                })
-            };
-        });
-    });
+
+    // app.get('/logout', (req, res) => {
+    //     res.render('index')
+    // });
+
 
 }
