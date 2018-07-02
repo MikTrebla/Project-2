@@ -1,7 +1,7 @@
 $(document).ready(() => {
   console.log("ready!");
 
-  $("#register").click(event => {
+  $("#register").click((event) => {
 
     // event.preventDefault();
     var user = {
@@ -39,7 +39,7 @@ $(document).ready(() => {
         .trim()
     };
 
-    $.post("/signin", user).then(data => {
+    $.post("/signin", user).then((data) => {
       console.log("logging in user", data);
       if (data === 'Sorry, account was not found.') {
         alert('Sorry, account was not found. Please make sure you typed in the correct credentials.')
