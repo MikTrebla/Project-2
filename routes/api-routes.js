@@ -25,6 +25,45 @@ module.exports = function (app) {
             });
     });
 
+<<<<<<< HEAD
+=======
+    //*****need feedback from Alex on how to do api searches on single game titles****
+    app.get('/game/:game', (req, res) => {
+        client.games({
+                //fields: 'name', // Return all fields
+                limit: 5, // Limit to 5 results
+                offset: 0, // Index offset for results
+                search: req.params.game
+            }, [
+                "name",
+                "release_dates.date",
+                "rating",
+                "cover"
+            ])
+            .then((response) => {
+                //console.log(response);
+                // response.body contains the parsed JSON response to this query
+                var d = new Date(response.body[0].release_dates[0].date)
+                d.toISOString();
+
+                var day =  d.toISOString();
+                newDay = day.slice(0,10);
+                
+                var list = {
+                    name: response.body[0].name,
+                    release_dates: newDay,
+                    rating: response.body[0].rating,
+                    cover: response.body[0].cover.url
+                }
+                console.log(list);
+                res.json(response);
+
+                //res.render('index', response);
+            }).catch(error => {
+                throw error;
+            });
+    });
+>>>>>>> alex6
 
 
 
