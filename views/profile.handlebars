@@ -1,3 +1,4 @@
+<div id="main-body">
 <div class="wrapper">
     <div class="user">
         <h1 class="name">
@@ -11,8 +12,8 @@
                 <u>Games</u>
             </h2>
 
-            {{#each games}}
-            <img class="gamePreview" src={{game.image}}>
+            {{#each Posts}}
+            <img class="gamePreview" src={{cover.url}}>
             <br>
             <br> {{/each}}
         </div>
@@ -22,9 +23,18 @@
         <h1>
             <u>Reviews from {{screen_name}}</u>
         </h1>
+<<<<<<< HEAD
         {{#each posts}} {{>posts/posts-block}} {{/each}}
+=======
+        {{#each Posts}}
+            {{title}}
+            <br>
+            <button class="delete-post" data-id="{{this.id}}">Delete Review</button>
+        {{/each}}
+>>>>>>> userhandlebars2
     </div>
 
 </div>
 
+</div>
 </div>

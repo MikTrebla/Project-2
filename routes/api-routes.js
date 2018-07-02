@@ -5,6 +5,7 @@ const client = igdb("1ef55fd89628c4844a334b3bee9b4194");
 
 var user = require("../models/user.js");
 
+<<<<<<< HEAD
 module.exports = function (app) {
     //
     app.get("/", (req, res) => {
@@ -64,6 +65,62 @@ module.exports = function (app) {
         res.render("signin");
     });
 
+=======
+module.exports = function(app) {
+  //
+  app.get("/", (req, res) => {
+    client
+      .games(
+        {
+          fields: "name", // Return all fields
+          limit: 5, // Limit to 5 results
+          offset: 15, // Index offset for results
+          search: "halo"
+        },
+        ["name", "release_dates.date", "rating", "cover"]
+      )
+      .then(response => {
+        // response.body contains the parsed JSON response to this query
+        res.render("index");
+        //res.render('index', response);
+      })
+      .catch(error => {
+        throw error;
+      });
+  });
+
+  // app.get('/api/user/:id', (req, res) => {
+
+  // });
+
+  // app.get('/api/game/:id', (req, res) => {
+
+  // });
+
+  app.get("/user/:screen_name", (req, res) => {
+    db.User.findOne({
+      where: {
+        screen_name: req.params.screen_name
+      },
+      include: [db.Post
+        // { model: db.user2game, include: [{ model: db.game }] }
+      ]
+    }).then(data => {
+      var userInfo = data.dataValues;
+
+      res.render("profile", userInfo);
+    });
+  });
+
+  // app.get('/api/review/:id', (req, res) => {
+
+  // });
+ 
+    app.get("/signin", (req, res) => {
+        res.render("signin");
+    });
+
+>>>>>>> userhandlebars2
     app.post('/signin', (req, res) => {
         console.log(req.session)
 
@@ -150,6 +207,7 @@ module.exports = function (app) {
 
     // app.get('/logout', (req, res) => {
 
+<<<<<<< HEAD
     // });
 
 
@@ -158,5 +216,13 @@ module.exports = function (app) {
     //     res.render('index')
     // });
 
+=======
+
+
+    // app.get('/logout', (req, res) => {
+    //     res.render('index')
+    // });
+
+>>>>>>> userhandlebars2
 
 }
