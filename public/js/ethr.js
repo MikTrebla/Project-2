@@ -17,22 +17,20 @@ $(document).ready(() => {
     };
     console.log(event);
 
-    $.post("/register", user).then(data => {
+    $.post("/register", user).then((data) => {
       console.log("add user", data);
-      window.location.replace("/login");
+      if (data === 'Sorry, this username is already taken! Please choose another.') {
+        alert('Sorry this username is taken');
+        window.location.replace('/register');
+      } else {
+        window.location.replace("/login");
+      }
     });
   });
 
-  $("#signin").click(event => {
+  $("#signin").click((event) => {
     event.preventDefault();
     var user = {
-<<<<<<< HEAD
-      screen_name: $("#screenName").val().trim(),
-      password: $("#password").val().trim()
-    };
-
-    $.post("/signin", user);
-=======
       screen_name: $("#screenName")
         .val()
         .trim(),
@@ -41,11 +39,15 @@ $(document).ready(() => {
         .trim()
     };
 
-    $.post("/register", user).then(data => {
+    $.post("/signin", user).then(data => {
       console.log("logging in user", data);
-      window.location.replace("/");
+      if (data === 'Sorry, account was not found.') {
+        alert('Sorry, account was not found. Please make sure you typed in the correct credentials.')
+        window.location.replace('/signin');
+      } else {
+        window.location.replace("/");
+      }
     });
->>>>>>> userapi1
   });
 
 });
