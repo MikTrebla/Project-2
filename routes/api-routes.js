@@ -54,10 +54,9 @@ module.exports = function(app) {
       where: {
         screen_name: req.params.screen_name
       },
-      include: [
-        { model: db.Review },
-        { model: db.user2game, include: [{ model: db.game }] }
-      ]
+    //   include: [db.Post
+        // { model: db.user2game, include: [{ model: db.game }] }
+    //   ]
     }).then(data => {
       var userInfo = data.dataValues;
       //    console.log(data);
