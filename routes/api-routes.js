@@ -69,7 +69,7 @@ module.exports = function (app) {
                         screen_name: req.body.screen_name
                     },
                 }).then(response => {
-                    return res.render('profile', response)
+                    return res.render('', response)
                 });
 
             } else {

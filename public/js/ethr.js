@@ -23,7 +23,7 @@ $(document).ready(() => {
         alert('Sorry this username is taken');
         window.location.replace('/register');
       } else {
-        window.location.replace("/login");
+        window.location.href="/login";
       }
     });
   });
@@ -31,7 +31,7 @@ $(document).ready(() => {
   $("#signin").click((event) => {
     event.preventDefault();
     var user = {
-      screen_name: $("#screenName")
+      screen_name: $("#screen_name")
         .val()
         .trim(),
       password: $("#password")
@@ -45,10 +45,12 @@ $(document).ready(() => {
         alert('Sorry, account was not found. Please make sure you typed in the correct credentials.')
         window.location.replace('/signin');
       } else {
-        window.location.replace("/profile");
+        window.location.href="/";
+        console.log(data);
       }
     });
   });
+
 
 });
 
