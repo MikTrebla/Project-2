@@ -106,7 +106,7 @@ module.exports = function (app) {
     });
 
 
-    app.get("/login", (req, res) => {
+    app.get("/signin", (req, res) => {
         res.render("signin");
     });
 
@@ -129,7 +129,7 @@ module.exports = function (app) {
                 results.token = token;
                 res.cookie('token', token);
                 req.session.user = results;
-                db.User.update({
+                results.update({
                     token: token,
                     where: {
                         screen_name: req.body.screen_name
