@@ -45,7 +45,7 @@ $(document).ready(() => {
         alert('Sorry, account was not found. Please make sure you typed in the correct credentials.')
         window.location.replace('/signin');
       } else {
-        window.location.replace("/");
+        window.location.replace("/profile");
       }
     });
   });
