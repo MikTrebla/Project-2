@@ -1,4 +1,4 @@
-.game-content {
+/* .game-content {
     margin-left: 20px; 
 }
 
@@ -54,4 +54,90 @@ b {
 p {
     padding: 10px;
     padding-top: 0px;
+} */
+
+#box-shadow {
+    box-shadow: 20px 20px rgb(15, 15, 15);
+    border-radius: 5px;
+}
+
+#gamePage {
+    position: relative;
+    clear: both;
+    background-color: rgb(35, 35, 35);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    overflow: hidden;
+    max-width: 1200px;
+    min-width: 900px;
+    width: 100%;
+    height: auto;
+    color: rgb(200, 200, 200);
+    font-family: "Gill Sans", "Gill Sans MT", "Calibri", "Trebuchet MS", sans-serif;
+    font-size: 18px;
+}
+
+i {
+    font-size: 80%;
+}
+
+b {
+    font-size: 110%;
+    color: rgb(120, 120, 120);
+}
+
+.no-pads {
+    margin: 0px;
+    padding: 0px;
+}
+
+#game-title {
+    color: #e2e2e2 !important;
+    font-size: 150%;
+    padding-top: 16px;
+    padding-bottom: 5px;
+}
+
+#game-score {
+    font-size: 125%;
+    color: rgb(230, 230, 230);
+    padding-top: 10px;
+}
+
+#nav-sum {
+    background-color: rgb(20, 20, 20);
+    color: rgb(200, 200, 200);
+    padding: 7px;
+    padding-left: 15px;
+    font-size: 15px;
+}
+
+.top-link {
+    text-decoration: none;
+    color: rgb(200, 200, 200);
+    padding: 7px;
+}
+
+#game-container {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    padding: 10px;
+    height: 100%;
+}
+
+#game-poster {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 5px;
+}
+
+.poster-content {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.game-content {
+    padding-right: 40px;
+    padding-left: 10px;
+    text-align: justify;
 }

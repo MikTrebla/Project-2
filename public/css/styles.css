@@ -1,4 +1,4 @@
-body {
+/* body {
     background-color: #333;
 }
 
@@ -125,4 +125,137 @@ img {
     padding-left: 10px;
     font-family: "Teko", sans-serif;
     font-size: x-large;
+} */
+
+/* <=================> */
+
+body {
+    background-color: #333;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 30px;
+}
+
+#navbar {
+    position: relative;
+    clear: both;
+    background-color: black;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    overflow: hidden;
+    max-width: 1200px;
+    min-width: 900px;
+    width: 100%;
+}
+
+#grid-container {
+    display: grid;
+    grid-template-columns: 15% 30% 55%;
+    padding: 10px;
+    padding-top: 0px;
+    max-height: 110px;
+    min-height: 40px;
+    height: 100%;
+}
+
+.grid-item {
+    float: left;
+    text-align: center;
+    margin-top: 40px; 
+}
+
+.home_logo {
+    text-align: center;
+}
+
+#home_btn {
+    width: 100%;
+    min-width: 90px;
+    max-width: 140px;
+}
+
+#search_bar {
+    font-size: 15px;
+    font-family: "Gill Sans", "Gill Sans MT", "Calibri", "Trebuchet MS", sans-serif;
+    background-color: rgb(35, 35, 35);
+    padding: 7px;
+    width: 80%;
+    min-width: 200px;
+    height: 20px;
+    border: hidden;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#search_bar::placeholder {
+    color: rgb(200, 200, 200);
+    font-size: 16px;
+    padding-left: 5px;
+}
+
+#search_btn {
+    font-size: 15px;
+    background: rgb(20, 20, 20);
+    height: 33.1px;
+    width: 30px;
+    border: 0 none;
+    cursor: pointer;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#btn-icon {
+    font-size: 15px;
+    color: rgb(200, 200, 200);
+}
+
+#all-links {
+    padding-top: 30px;
+    float: right;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%; 
+}
+
+.nav-link {
+    color: rgb(200, 200, 200);
+    text-align: center;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: "Gill Sans", "Gill Sans MT", "Calibri", "Trebuchet MS", sans-serif;
+    height: 20%;
+}
+
+.link-border {
+    border-style: solid;
+    border-color: #333;
+    border-width: 0px 0px 0px 3px;
+}
+
+.login-bar {
+    position: relative;
+    background-color: rgb(20, 20, 20);
+    width: 99.1%;
+    text-align: right;
+    padding: 10px;
+    padding-left: 10px;
+}
+
+.login-link, .sign-link {
+    color: #e2e2e2;
+    font-size: 15px;
+    font-family: "Gill Sans", "Gill Sans MT", "Calibri", "Trebuchet MS", sans-serif;
+    text-decoration: none;
+    padding-right: 15px;
+}
+
+.sign-link {
+    padding-right: 0px;
+}
+
+.icon {
+    color: #e2e2e2;
+    padding-right: 7px;
+    padding-left: 7px;
 }
