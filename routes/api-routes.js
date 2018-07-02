@@ -19,9 +19,9 @@ module.exports = function (app) {
                 "rating",
                 "cover"
             ])
-            .then(response => {
+            .then((response) => {
                 // response.body contains the parsed JSON response to this query
-                res.render("index");
+                res.render("index", response);
                 //res.render('index', response);
             }).catch(error => {
                 throw error;
@@ -52,7 +52,8 @@ module.exports = function (app) {
 
     app.post('/review/:id', (req, res) => {
         db.Post.create({
-            body: req.body.body
+            body: req.body.body,
+            Userid : db.User.id
         }).then((result) => {
             res.send(result);
         });
