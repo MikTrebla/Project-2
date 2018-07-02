@@ -26,36 +26,22 @@ module.exports = function (app) {
     });
 
 
-    app.get("/user/:screen_name", (req, res) => {
-        db.User.findOne({
-            where: {
-                screen_name: req.params.screen_name
-            }
-        }).then(data => {
-            var userInfo = data.dataValues;
-            //    console.log(data);
-            //    console.log(data.dataValues);
-            //    res.json(userInfo);
-            res.render("profile", userInfo);
-        });
-    });
 
-    app.get("/user/:screen_name", (req, res) => {
-        db.User.findOne({
-            where: {
-                screen_name: req.params.screen_name
-            },
-            //   include: [db.Post
-            // { model: db.user2game, include: [{ model: db.game }] }
-            //   ]
-        }).then(data => {
-            var userInfo = data.dataValues;
-            //    console.log(data);
-            //    console.log(data.dataValues);
-            // res.json(userInfo);
-            res.render("profile", userInfo);
-        });
+
+  app.get("/user/:screen_name", (req, res) => {
+    db.User.findOne({
+      where: {
+        screen_name: req.params.screen_name
+      },
+      include: [db.Post
+        // { model: db.user2game, include: [{ model: db.game }] }
+      ]
+    }).then(data => {
+      var userInfo = data.dataValues;
+
+      res.render("profile", userInfo);
     });
+  });
 
 
 
