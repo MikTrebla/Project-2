@@ -137,8 +137,7 @@ module.exports = function (app) {
                     },
 
                 }).then((response) => {
-                    response
-                    return res.render('profile', results)
+                    return res.render('profile', response)
                 });
 
             } else {
