@@ -56,11 +56,6 @@ p {
     padding-top: 0px;
 } */
 
-#box-shadow {
-    box-shadow: 20px 20px rgb(15, 15, 15);
-    border-radius: 5px;
-}
-
 #gamePage {
     position: relative;
     clear: both;

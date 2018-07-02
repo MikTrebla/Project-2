@@ -137,6 +137,11 @@ body {
     margin: 30px;
 }
 
+#box-shadow {
+    box-shadow: 20px 20px rgb(15, 15, 15);
+    border-radius: 5px;
+}
+
 #navbar {
     position: relative;
     clear: both;
