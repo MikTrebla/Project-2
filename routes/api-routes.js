@@ -83,7 +83,7 @@ module.exports = function (app) {
     });
 
     app.get('/createreview', (req, res) => {
-        res.render('', res);
+        res.render('review', res);
     });
 
     app.post('/review/:id', (req, res) => {
@@ -107,7 +107,6 @@ module.exports = function (app) {
 
 
     app.get("/login", (req, res) => {
-        console.log("loading");
         res.render("signin");
     });
 
@@ -135,7 +134,6 @@ module.exports = function (app) {
                     where: {
                         screen_name: req.body.screen_name
                     },
-
                 }).then((response) => {
                     return res.render('profile', response)
                 });
@@ -163,9 +161,9 @@ module.exports = function (app) {
     //////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    // app.get('/logout', (req, res) => {
-
-    // });
+    app.get('/logout', (req, res) => {
+        res.render('index')
+    });
 
     app.post('/register', (req, res) => {
         db.User.findOne({
