@@ -17,7 +17,7 @@ $(document).ready(() => {
 
     $.post("/register", user).then(data => {
       console.log("add user", data);
-      window.location.replace("/");
+      window.location.replace("/login");
     });
   });
 
@@ -27,15 +27,18 @@ $(document).ready(() => {
       screen_name: $("#screenName")
         .val()
         .trim(),
-      password: $("password")
+      password: $("#password")
         .val()
         .trim()
     };
 
-    $.post("/login", user);
+    $.post("/register", user).then(data => {
+      console.log("logging in user", data);
+      window.location.replace("/");
+    });
   });
-});
 
+});
 
 
 // this is for login validation
