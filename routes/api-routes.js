@@ -130,7 +130,16 @@ module.exports = function (app) {
                 results.token = token;
                 res.cookie('token', token);
                 req.session.user = results;
-                return res.render('profile', results)
+                db.User.update({
+                    token: token,
+                    where: {
+                        screen_name: req.body.screen_name
+                    },
+
+                }).then((response) => {
+                    response
+                    return res.render('profile', results)
+                });
 
             } else {
                 return res.send('Sorry, account was not found.')
