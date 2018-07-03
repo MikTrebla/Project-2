@@ -200,9 +200,8 @@ module.exports = function (app) {
             rating: req.body.rating,
             body: req.body.body,
             gameId: req.params.id
-
+        })
         }).then();
-    }
 
     //to populate reviews per game
     app.get('/game/:game/reviews', (req, res) => {
