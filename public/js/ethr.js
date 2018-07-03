@@ -23,7 +23,7 @@ $(document).ready(() => {
         alert('Sorry this username is taken');
         window.location.replace('/register');
       } else {
-        window.location.replace("/login");
+        window.location.href="/login";
       }
     });
   });
@@ -31,7 +31,7 @@ $(document).ready(() => {
   $("#signin").click((event) => {
     event.preventDefault();
     var user = {
-      screen_name: $("#screenName")
+      screen_name: $("#screen_name")
         .val()
         .trim(),
       password: $("#password")
@@ -45,30 +45,11 @@ $(document).ready(() => {
         alert('Sorry, account was not found. Please make sure you typed in the correct credentials.')
         window.location.replace('/signin');
       } else {
-        window.location.href = "/profile/" + user.screen_name.toLowerCase();
+        window.location.href="/";
+        console.log(data);
       }
     });
   });
-
-
-  $('#search_btn').click(event => {
-    event.preventDefault();
-    var query = $('#search_bar').val().trim()
-    console.log(query);
-
-    $.get('/search/' + query).then(data => {
-      console.log('received')
-      window.location.replace('/search/' + query)
-      
-    })
-
-  });
-
-
-
-
-
-
 
 
 });
