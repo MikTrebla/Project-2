@@ -2,15 +2,16 @@
 
 <div id="all-results">
     {{#each this}}
-    <a id="{{id}}" class="games" href="#">
-    <div id="game-cover">
-        <img class="game-posters" src='https:{{cover}}' alt="{{name}}">
-    </div>
-    <div id="game-info">
-        <div id="game-title">
-            <p class="game-name">{{name}}</p>
+    <a id="{{name}}" class="games" href="/game/search/" + "{{name}}">
+        <div id="game-cover">
+            <img class="game-posters" src='https:{{cover}}' alt="{{name}}">
         </div>
-    </div>
+        <div id="game-info">
+            <div id="game-title">
+                <p class="game-name">{{name}}</p>
+            </div>
+        </div>
     </a>
     {{/each}}
+</div>
 </div>

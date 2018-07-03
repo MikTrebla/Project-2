@@ -23,7 +23,7 @@ $(document).ready(() => {
         alert('Sorry this username is taken');
         window.location.replace('/register');
       } else {
-        window.location.href="/login";
+        window.location.href = "/login";
       }
     });
   });
@@ -45,12 +45,32 @@ $(document).ready(() => {
         alert('Sorry, account was not found. Please make sure you typed in the correct credentials.')
         window.location.replace('/signin');
       } else {
-        window.location.href="/";
+        window.location.href = "/";
         console.log(data);
       }
     });
   });
 
+  $('#search_btn').click(event => {
+    event.preventDefault();
+    var query = $('#search_bar').val().trim()
+
+    $.get('/search/' + query).then(data => {
+      window.location.replace('/search/' + query);
+
+    });
+  });
+
+
+  $(document).on('click', '.games', function (event) {
+    event.preventDefault();
+    var gameName = $(this).attr('id');
+    console.log(gameName);
+    $.get('/game/search/' + gameName).then(data => {
+      console.log('searched game on click');
+      window.location.replace('/game/search/' + gameName);
+    })
+  })
 
 });
 

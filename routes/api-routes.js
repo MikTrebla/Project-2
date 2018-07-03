@@ -25,36 +25,31 @@ module.exports = function (app) {
             });
     });
 
-    //*****need feedback from Alex on how to do api searches on single game titles****
-    app.get('/game/:game', (req, res) => {
+    app.get('/game/search/:gameName', (req, res) => {
+        // console.log('helloWorld')
         client.games({
-                //fields: 'name', // Return all fields
-                limit: 5, // Limit to 5 results
-                offset: 0, // Index offset for results
-                search: req.params.game
-            }, [
-                "name",
-                "release_dates.date",
-                "rating",
-                "cover"
-            ])
+                search: req.params.gameName,
+                limit: 1,
+                fields : '*' 
+            }, )
             .then((response) => {
-                //console.log(response);
-                // response.body contains the parsed JSON response to this query
+                console.log(response);
+
                 var d = new Date(response.body[0].release_dates[0].date)
                 d.toISOString();
 
-                var day =  d.toISOString();
-                newDay = day.slice(0,10);
-                
+                var day = d.toISOString();
+                newDay = day.slice(0, 10);
+
                 var list = {
                     name: response.body[0].name,
                     release_dates: newDay,
                     rating: response.body[0].rating,
-                    cover: response.body[0].cover.url
+                    cover: response.body[0].cover.url,
+                    summary : response.body[0].summary
                 }
                 console.log(list);
-                res.json(response);
+                res.render('game', list);
 
                 //res.render('index', response);
             }).catch(error => {
@@ -64,20 +59,20 @@ module.exports = function (app) {
 
 
 
-  app.get("/user/:screen_name", (req, res) => {
-    db.User.findOne({
-      where: {
-        screen_name: req.params.screen_name
-      },
-      include: [db.Post
-        // { model: db.user2game, include: [{ model: db.game }] }
-      ]
-    }).then(data => {
-      var userInfo = data.dataValues;
+    app.get("/user/:screen_name", (req, res) => {
+        db.User.findOne({
+            where: {
+                screen_name: req.params.screen_name
+            },
+            include: [db.Post
+                // { model: db.user2game, include: [{ model: db.game }] }
+            ]
+        }).then(data => {
+            var userInfo = data.dataValues;
 
-      res.render("profile", userInfo);
+            res.render("profile", userInfo);
+        });
     });
-  });
 
 
 
@@ -87,7 +82,7 @@ module.exports = function (app) {
     });
 
     app.post('/signin', (req, res) => {
-        console.log(req.session)
+        // console.log(req.session)
 
         db.User.findOne({
             where: {
@@ -105,12 +100,14 @@ module.exports = function (app) {
                         screen_name: req.body.screen_name
                     },
                 }).then(response => {
+                    console.log(response);
                     return res.render('', response)
                 });
 
             } else {
                 return res.send('Sorry, account was not found.')
             }
+
         })
     });
 
@@ -157,9 +154,9 @@ module.exports = function (app) {
         });
     });
 
-    app.get('/searchresults', (req, res) => {
-        res.render('search');
-    })
+    // app.get('/searchresults', (req, res) => {
+    //     res.render('search');
+    // })
 
     // populate search results
     app.get('/search/:query', (req, res) => {
@@ -199,9 +196,9 @@ module.exports = function (app) {
 
 
     //to populate reviews per game
-    // app.post('/game/:game/reviews', (req, res) => {
+    app.get('/game/:game/reviews', (req, res) => {
 
-    // })
+    })
 
     //////////check if user is logged into current session when attempting to submit reviews//////////
 
