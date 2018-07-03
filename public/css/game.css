@@ -26,6 +26,7 @@ b {
 .no-pads {
     margin: 0px;
     padding: 0px;
+    margin-top: 5px;
 }
 
 #game-title {
@@ -39,6 +40,7 @@ b {
     font-size: 125%;
     color: rgb(230, 230, 230);
     padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #nav-sum {
@@ -77,4 +79,17 @@ b {
     padding-right: 40px;
     padding-left: 10px;
     text-align: justify;
+}
+
+#take-me-there {
+    margin: 10px;
+    height: 40px;
+    width: 120px;
+    border: none;
+    border-radius: 5px;
+    background-color:rgb(80, 80, 80);
+    color: rgb(200, 200, 200);
+    font-weight: bold;
+    font-size: 12px;
+    margin-top: 5px;
 }
