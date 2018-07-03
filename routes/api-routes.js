@@ -194,6 +194,15 @@ module.exports = function (app) {
             });
     })
 
+    app.post("/game/:id/review", (req, res) =>{
+        db.Post.create({
+            title: req.body.title,
+            rating: req.body.rating,
+            body: req.body.body,
+            gameId: req.params.id
+
+        }).then();
+    }
 
     //to populate reviews per game
     app.get('/game/:game/reviews', (req, res) => {

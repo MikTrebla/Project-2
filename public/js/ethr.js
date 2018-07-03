@@ -70,7 +70,22 @@ $(document).ready(() => {
       console.log('searched game on click');
       window.location.replace('/game/search/' + gameName);
     })
-  })
+  });
+
+    $("#submit-review").click(event =>{
+    event.preventDefault();
+    var review = {
+      title: $("#myTitle").val().trim(),
+      rating: $("input[name=star]:checked").val(),
+      body: $("#myComment").val.trim()
+    }
+
+    $.post("/game/"+gameName+"/review", review).then(data =>{
+      console.log("review added");
+      window.location.replace()
+    })
+
+  });
 
 });
 
