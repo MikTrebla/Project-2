@@ -209,7 +209,7 @@ module.exports = function (app) {
                 gameId: req.params.id
             }
         }).then((dbPost)=>{
-            consol.log(dbPost);
+            console.log(dbPost);
         })
 
     })
