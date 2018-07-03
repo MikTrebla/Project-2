@@ -3,7 +3,7 @@
 <div id="all-results">
     
     {{#each this}}
-    <div id="games">
+    <a id="games" href="#">
     <div id="game-cover">
         <img class="game-posters" src='https:{{cover}}' alt="{{name}}">
     </div>
@@ -12,7 +12,6 @@
             <p>{{name}}</p>
         </div>
     </div>
-    </div>
-    <div id="blank"></div>
+    </a>
     {{/each}}
 </div>
