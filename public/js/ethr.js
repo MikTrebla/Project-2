@@ -2,6 +2,23 @@ $(document).ready(() => {
   console.log("ready!");
   var gameName;
 
+  //this will allows slideshow to go to next automatically every 3.5s
+  var slideIndex = 0;
+  showSlides();
+  function showSlides() {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {
+      slideIndex = 1
+    }
+    slides[slideIndex - 1].style.display = "block";
+    setTimeout(showSlides, 3500); 
+  }
+  
   $("#register").click((event) => {
 
     // event.preventDefault();
@@ -72,7 +89,7 @@ $(document).ready(() => {
     })
   });
 
-    $("#submit-review").click(event =>{
+  $("#submit-review").click(event => {
     event.preventDefault();
     var review = {
       title: $("#myTitle").val().trim(),
@@ -80,8 +97,8 @@ $(document).ready(() => {
       body: $("#myComment").val.trim()
     }
 
-    $.post("/game/"+gameName+"/review", review).then(data =>{
-      console.log("review added"+data);
+    $.post("/game/" + gameName + "/review", review).then(data => {
+      console.log("review added" + data);
       window.location.replace()
     })
 

@@ -6,7 +6,7 @@ const client = igdb("1ef55fd89628c4844a334b3bee9b4194");
 var user = require("../models/user.js");
 
 module.exports = function (app) {
-    
+
     app.get("/", (req, res) => {
         client
             .games({
@@ -191,24 +191,24 @@ module.exports = function (app) {
             });
     })
 
-    app.post("/game/:id/review", (req, res) =>{
+    app.post("/game/:id/review", (req, res) => {
         db.Post.create({
             title: req.body.title,
             rating: req.body.rating,
             body: req.body.body,
             gameId: req.params.id
-        }).then(results=>{
+        }).then(results => {
             res.send(results);
-        });
         })
+    });
 
     //to populate reviews per game
     app.get('/game/:game/reviews', (req, res) => {
         db.Post.findAll({
-            where:{
+            where: {
                 gameId: req.params.id
             }
-        }).then((dbPost)=>{
+        }).then((dbPost) => {
             consol.log(dbPost);
         })
 
