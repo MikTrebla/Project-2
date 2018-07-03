@@ -51,6 +51,36 @@ $(document).ready(() => {
     });
   });
 
+  $('#search_btn').click(event => {
+    event.preventDefault();
+    var query = $('#search_bar').val().trim()
+    console.log(query);
+
+    $.get('/search/' + query).then(data => {
+      console.log('received')
+      window.location.replace('/search/' + query)
+      
+    })
+
+  });
+
+  $("#submit-review").click(event =>{
+    event.preventDefault();
+    var review = {
+      title: $("#myTitle").val().trim(),
+      rating: $("input[name=star]:checked").val(),
+      body: $("#myComment").val.trim()
+    }
+
+    $.post("/game/"+gameName+"/review", review).then(data =>{
+      console.log("review added");
+      window.location.replace()
+    })
+
+  });
+
+
+
 
 });
 
