@@ -44,9 +44,9 @@ module.exports = function (app) {
                 var d = new Date(response.body[0].release_dates[0].date)
                 d.toISOString();
 
-                var day =  d.toISOString();
-                newDay = day.slice(0,10);
-                
+                var day = d.toISOString();
+                newDay = day.slice(0, 10);
+
                 var list = {
                     name: response.body[0].name,
                     release_dates: newDay,
@@ -64,20 +64,20 @@ module.exports = function (app) {
 
 
 
-  app.get("/user/:screen_name", (req, res) => {
-    db.User.findOne({
-      where: {
-        screen_name: req.params.screen_name
-      },
-      include: [db.Post
-        // { model: db.user2game, include: [{ model: db.game }] }
-      ]
-    }).then(data => {
-      var userInfo = data.dataValues;
+    app.get("/user/:screen_name", (req, res) => {
+        db.User.findOne({
+            where: {
+                screen_name: req.params.screen_name
+            },
+            include: [db.Post
+                // { model: db.user2game, include: [{ model: db.game }] }
+            ]
+        }).then(data => {
+            var userInfo = data.dataValues;
 
-      res.render("profile", userInfo);
+            res.render("profile", userInfo);
+        });
     });
-  });
 
 
 
@@ -87,7 +87,7 @@ module.exports = function (app) {
     });
 
     app.post('/signin', (req, res) => {
-        console.log(req.session)
+        // console.log(req.session)
 
         db.User.findOne({
             where: {
@@ -105,12 +105,14 @@ module.exports = function (app) {
                         screen_name: req.body.screen_name
                     },
                 }).then(response => {
+                    console.log(response);
                     return res.render('', response)
                 });
 
             } else {
                 return res.send('Sorry, account was not found.')
             }
+
         })
     });
 

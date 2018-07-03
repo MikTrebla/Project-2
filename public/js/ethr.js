@@ -23,7 +23,7 @@ $(document).ready(() => {
         alert('Sorry this username is taken');
         window.location.replace('/register');
       } else {
-        window.location.href="/login";
+        window.location.href = "/login";
       }
     });
   });
@@ -45,12 +45,24 @@ $(document).ready(() => {
         alert('Sorry, account was not found. Please make sure you typed in the correct credentials.')
         window.location.replace('/signin');
       } else {
-        window.location.href="/";
+        window.location.href = "/";
         console.log(data);
       }
     });
   });
 
+  $('#search_btn').click(event => {
+    event.preventDefault();
+    var query = $('#search_bar').val().trim()
+    console.log(query);
+
+    $.get('/search/' + query).then(data => {
+      console.log('received')
+      window.location.replace('/search/' + query);
+
+    })
+
+  });
 
 });
 
