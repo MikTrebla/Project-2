@@ -1,23 +1,19 @@
-<link rel="stylesheet" href="../css/game.css" type="text/css" />
+<link rel="stylesheet" href="/css/game.css" type="text/css" />
 
-<div>
-    <div id="game_title" class="game-content">
-        {{name}}
+<div id="gamePage">
+<div id="nav-sum">
+    <a class="top-link" href="#">Home</a><i class="fas fa-angle-right"></i><a class="top-link" href="#">Category</a><i class="fas fa-angle-right"></i> {{this.name}}
+</div>
+<div id="game-container">
+    <div class="poster-content">
+        <img id="game-poster" src="{{cover}}" alt="{{name}}">
+        <p class="no-pads"><b>Release Date :</b> {{release_dates}}</p>
+        <p id="game-score" class="no-pads"><strong>Score :</strong> {{rating}} %</p>
     </div>
-    <div id="game-info">
-        <img id="poster" src="{{cover}}" alt="{{name}}">
-        <div id="info">
-            <p id="box_title" class="game-content">
-                <b>{{this.name}}</b>
-            </p>
-            <p id="box_rating" class="game-content">
-                <b>Score: </b> {{rating}}</p>
-            <p id="box_date" class="game-content">
-                <b>Release Date: </b> {{release_dates}}</p>
-            <p id="box_summary" class="game-content">
-                <b>Summary: </b> {{summary}}</p>
-
-        </div>
+    <div class="game-content">
+        <p id="game-title" class="no-pads"><strong>{{this.name}}</strong></p>
+        <p class="no-pads"><b>Summary :</b></p><p>{{summary}}</p>
     </div>
-
+</div>
+</div>
 </div>
