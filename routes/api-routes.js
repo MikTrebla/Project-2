@@ -201,10 +201,19 @@ module.exports = function (app) {
             body: req.body.body,
             gameId: req.params.id
         })
-        }).then();
+        }).then(results=>{
+            res.send(results);
+        });
 
     //to populate reviews per game
     app.get('/game/:game/reviews', (req, res) => {
+        db.Post.findAll({
+            where:{
+                gameId: req.params.id
+            }
+        }).then((dbPost)=>{
+            consol.log(dbPost);
+        })
 
     })
 

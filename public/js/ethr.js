@@ -81,7 +81,7 @@ $(document).ready(() => {
     }
 
     $.post("/game/"+gameName+"/review", review).then(data =>{
-      console.log("review added");
+      console.log("review added"+data);
       window.location.replace()
     })
 
