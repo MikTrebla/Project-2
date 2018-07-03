@@ -191,27 +191,16 @@ module.exports = function (app) {
             });
     })
 
-<<<<<<< HEAD
-    // app.post("/game/:id/review", (req, res) =>{
-    //     db.Post.create({
-    //         title: req.body.title,
-    //         rating: req.body.rating,
-    //         body: req.body.body,
-    //         gameId: req.params.id
-    //     })
-    //     }).then();
-=======
     app.post("/game/:id/review", (req, res) =>{
         db.Post.create({
             title: req.body.title,
             rating: req.body.rating,
             body: req.body.body,
             gameId: req.params.id
-        })
         }).then(results=>{
             res.send(results);
         });
->>>>>>> reviewposts1
+        })
 
     //to populate reviews per game
     app.get('/game/:game/reviews', (req, res) => {
