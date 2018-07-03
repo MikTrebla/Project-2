@@ -9,14 +9,15 @@
         <img id="game-poster" src="{{cover}}" alt="{{name}}">
         <p class="no-pads"><b>Release Date :</b> {{release_dates}}</p>
         <p id="game-score" class="no-pads"><strong>Score :</strong> {{rating}} %</p>
+        <form action="/" method="get">
+            <input type="submit" value="Submit Review" name="Submit" id="take-me-there" />
+        </form>
     </div>
     <div class="game-content">
         <p id="game-title" class="no-pads"><strong>{{this.name}}</strong></p>
         <p class="no-pads"><b>Summary :</b></p><p>{{summary}}</p>
     </div>
 </div>
-<div>
-    <a href="">Submit</a>
-</div>
+
 </div>
 </div>
