@@ -1,5 +1,6 @@
 $(document).ready(() => {
   console.log("ready!");
+  var gameName;
 
   $("#register").click((event) => {
 
@@ -56,7 +57,7 @@ $(document).ready(() => {
     var query = $('#search_bar').val().trim()
 
     $.get('/search/' + query).then(data => {
-      window.location.replace('/search/' + query);
+      window.location.href = '/search/' + query;
 
     });
   });
@@ -68,7 +69,7 @@ $(document).ready(() => {
     console.log(gameName);
     $.get('/game/search/' + gameName).then(data => {
       console.log('searched game on click');
-      window.location.replace('/game/search/' + gameName);
+      window.location.href = '/game/search/' + gameName;
     })
   })
 

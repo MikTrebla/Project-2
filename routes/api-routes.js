@@ -46,7 +46,7 @@ module.exports = function (app) {
                     release_dates: newDay,
                     rating: response.body[0].rating,
                     cover: response.body[0].cover.url,
-                    summary : response.body[0].summary
+                    summary : response.body[0].summary,
                 }
                 console.log(list);
                 res.render('game', list);
