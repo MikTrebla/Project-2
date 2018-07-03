@@ -128,7 +128,7 @@ module.exports = function (app) {
     });
 
     app.get('/searchresults', (req, res) => {
-        res.render('search')
+        res.render('search');
     })
 
     // populate search results
