@@ -61,13 +61,14 @@ $(document).ready(() => {
     });
   });
 
-  $('.games').click(event => {
+
+  $(document).on('click', '.games', function (event) {
     event.preventDefault();
-    var gameID = $(this).attr('#data-id');
-    console.log(gameID);
-    $.get('/game/' + gameID).then(data => {
+    var gameName = $(this).attr('id');
+    console.log(gameName);
+    $.get('/game/search/' + gameName).then(data => {
       console.log('searched game on click');
-      window.location.replace('/game/' + gameID);
+      window.location.replace('/game/search/' + gameName);
     })
   })
 

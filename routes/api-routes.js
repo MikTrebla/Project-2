@@ -25,13 +25,16 @@ module.exports = function (app) {
             });
     });
 
-    app.get('/game/:gameID', (req, res) => {
+    app.get('/game/search/:gameName', (req, res) => {
+        // console.log('helloWorld')
         client.games({
-                id: req.params.gameID
-            })
+                search: req.params.gameName,
+                limit: 1,
+                fields : '*' 
+            }, )
             .then((response) => {
                 console.log(response);
-                
+
                 var d = new Date(response.body[0].release_dates[0].date)
                 d.toISOString();
 
@@ -42,7 +45,8 @@ module.exports = function (app) {
                     name: response.body[0].name,
                     release_dates: newDay,
                     rating: response.body[0].rating,
-                    cover: response.body[0].cover.url
+                    cover: response.body[0].cover.url,
+                    summary : response.body[0].summary
                 }
                 console.log(list);
                 res.render('game', list);
@@ -150,9 +154,9 @@ module.exports = function (app) {
         });
     });
 
-    app.get('/searchresults', (req, res) => {
-        res.render('search');
-    })
+    // app.get('/searchresults', (req, res) => {
+    //     res.render('search');
+    // })
 
     // populate search results
     app.get('/search/:query', (req, res) => {
