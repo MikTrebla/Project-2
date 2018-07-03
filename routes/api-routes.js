@@ -6,7 +6,7 @@ const client = igdb("1ef55fd89628c4844a334b3bee9b4194");
 var user = require("../models/user.js");
 
 module.exports = function (app) {
-    //
+    
     app.get("/", (req, res) => {
         client
             .games({
@@ -16,9 +16,7 @@ module.exports = function (app) {
                 search: "halo"
             }, ["name", "release_dates.date", "rating", "cover"])
             .then(response => {
-                // response.body contains the parsed JSON response to this query
                 res.render("index");
-                //res.render('index', response);
             })
             .catch(error => {
                 throw error;
@@ -26,7 +24,6 @@ module.exports = function (app) {
     });
 
     app.get('/game/search/:gameName', (req, res) => {
-        // console.log('helloWorld')
         client.games({
                 search: req.params.gameName,
                 limit: 1,
@@ -51,7 +48,6 @@ module.exports = function (app) {
                 console.log(list);
                 res.render('game', list);
 
-                //res.render('index', response);
             }).catch(error => {
                 throw error;
             });
@@ -82,7 +78,6 @@ module.exports = function (app) {
     });
 
     app.post('/signin', (req, res) => {
-        // console.log(req.session)
 
         db.User.findOne({
             where: {
@@ -167,20 +162,13 @@ module.exports = function (app) {
             }, [
                 "name",
                 'cover',
-                'release_dates.date'
+                'release_dates.date',
             ])
             .then(response => {
-                // console.log(response);
-                // var d = new Date(response.body[0].release_dates[0].date)
-                // d.toISOString();
-
-                // var day = d.toISOString();
-                // newDay = day.slice(0, 10);
                 var body = response.body;
-                console.log(body);
                 var games = [];
                 for (var i = 0; i < body.length; i++) {
-                    if (!body[i].cover.url) {
+                    if (!body[i].cover) {
                         var placeholder = '../img/placeholder.png'
                         var gameObj = {
                             id: body[i].id,
@@ -191,12 +179,11 @@ module.exports = function (app) {
                         var gameObj = {
                             id: body[i].id,
                             name: body[i].name,
-                            cover: body[i].cover.url
+                            cover: 'https:' + body[i].cover.url
                         }
                     }
                     games.push(gameObj);
                 }
-                console.log(games);
                 res.render('search', games);
 
             }).catch(error => {

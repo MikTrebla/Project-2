@@ -54,9 +54,10 @@ $(document).ready(() => {
 
   $('#search_btn').click(event => {
     event.preventDefault();
-    var query = $('#search_bar').val().trim()
+    var query = $('#search_bar').val()
 
     $.get('/search/' + query).then(data => {
+      console.log('received request')
       window.location.href = '/search/' + query;
 
     });
@@ -66,9 +67,7 @@ $(document).ready(() => {
   $(document).on('click', '.games', function (event) {
     event.preventDefault();
     var gameName = $(this).attr('id');
-    console.log(gameName);
     $.get('/game/search/' + gameName).then(data => {
-      console.log('searched game on click');
       window.location.href = '/game/search/' + gameName;
     })
   });
