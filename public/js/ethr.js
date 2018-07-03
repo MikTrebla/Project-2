@@ -54,15 +54,22 @@ $(document).ready(() => {
   $('#search_btn').click(event => {
     event.preventDefault();
     var query = $('#search_bar').val().trim()
-    console.log(query);
 
     $.get('/search/' + query).then(data => {
-      console.log('received')
       window.location.replace('/search/' + query);
 
-    })
-
+    });
   });
+
+  $('.games').click(event => {
+    event.preventDefault();
+    var gameID = $(this).attr('#data-id');
+    console.log(gameID);
+    $.get('/game/' + gameID).then(data => {
+      console.log('searched game on click');
+      window.location.replace('/game/' + gameID);
+    })
+  })
 
 });
 

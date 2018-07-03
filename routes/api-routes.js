@@ -25,22 +25,13 @@ module.exports = function (app) {
             });
     });
 
-    //*****need feedback from Alex on how to do api searches on single game titles****
-    app.get('/game/:game', (req, res) => {
+    app.get('/game/:gameID', (req, res) => {
         client.games({
-                //fields: 'name', // Return all fields
-                limit: 5, // Limit to 5 results
-                offset: 0, // Index offset for results
-                search: req.params.game
-            }, [
-                "name",
-                "release_dates.date",
-                "rating",
-                "cover"
-            ])
+                id: req.params.gameID
+            })
             .then((response) => {
-                //console.log(response);
-                // response.body contains the parsed JSON response to this query
+                console.log(response);
+                
                 var d = new Date(response.body[0].release_dates[0].date)
                 d.toISOString();
 
@@ -54,7 +45,7 @@ module.exports = function (app) {
                     cover: response.body[0].cover.url
                 }
                 console.log(list);
-                res.json(response);
+                res.render('game', list);
 
                 //res.render('index', response);
             }).catch(error => {
@@ -201,9 +192,9 @@ module.exports = function (app) {
 
 
     //to populate reviews per game
-    // app.post('/game/:game/reviews', (req, res) => {
+    app.get('/game/:game/reviews', (req, res) => {
 
-    // })
+    })
 
     //////////check if user is logged into current session when attempting to submit reviews//////////
 
