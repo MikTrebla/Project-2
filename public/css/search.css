@@ -1,0 +1,21 @@
+#games {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    max-width: 1200px;
+    min-width: 900px;
+    padding-top: 30px; 
+    color: rgb(200, 200, 200);
+    background-color: rgb(35, 35, 35);
+    font-family: "Gill Sans", "Gill Sans MT", "Calibri", "Trebuchet MS", sans-serif;
+    font-size: 18px;
+}
+
+#all-results {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#blank {
+    background-color: #333;
+    margin: 5px;
+}

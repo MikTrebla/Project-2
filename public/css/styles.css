@@ -140,6 +140,8 @@ body {
 #box-shadow {
     box-shadow: 20px 20px rgb(15, 15, 15);
     border-radius: 5px;
+    max-width: 1200px;
+    width: 100%;
 }
 
 #navbar {

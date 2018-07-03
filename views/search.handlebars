@@ -1,6 +1,9 @@
+<link rel="stylesheet" href="../css/search.css" type="text/css" />
+
 <div id="all-results">
     
     {{#each this}}
+    <div id="games">
     <div id="game-cover">
         <img class="game-posters" src='https:{{cover}}' alt="{{name}}">
     </div>
@@ -9,5 +12,7 @@
             <p>{{name}}</p>
         </div>
     </div>
+    </div>
+    <div id="blank"></div>
     {{/each}}
 </div>
