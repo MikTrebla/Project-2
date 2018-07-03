@@ -57,7 +57,13 @@ module.exports = function (app) {
         });
     });
 
-
+    app.get('/profile:', (req, res) => {
+        // if (req.session) {
+        res.render('profile');
+        // } else {
+        //     res.render('signin');
+        // }
+    })
 
 
     app.get("/signin", (req, res) => {
@@ -82,8 +88,8 @@ module.exports = function (app) {
                     where: {
                         screen_name: req.body.screen_name
                     },
-                }).then(response => {
-                    return res.render('profile', response)
+                }).then(data => {
+                    return res.render('profile', data.dataValues)
                 });
 
             } else {
@@ -135,6 +141,51 @@ module.exports = function (app) {
         });
     });
 
+    app.get('/searchresults', (req, res) => {
+        res.render('search')
+    })
+
+    // populate search results
+    app.get('/search/:query', (req, res) => {
+        console.log('hello');
+        client.games({
+                limit: 10,
+                search: req.params.query
+            }, [
+                "name",
+                'cover',
+                'release_dates.date'
+            ])
+            .then(response => {
+                // console.log(response);
+                // var d = new Date(response.body[0].release_dates[0].date)
+                // d.toISOString();
+
+                // var day = d.toISOString();
+                // newDay = day.slice(0, 10);
+                var body = response.body;
+                var games = [];
+                for (var i = 0; i < body.length; i++) {
+                    var gameObj = {
+                        id: body[i].id,
+                        name: body[i].name,
+                        cover: body[i].cover.url
+                    }
+                    games.push(gameObj);
+                }
+                console.log(games);
+                res.render('search', games);
+
+            }).catch(error => {
+                throw error;
+            });
+    })
+
+
+    //to populate reviews per game
+    // app.post('/game/:game/reviews', (req, res) => {
+
+    // })
 
     //////////check if user is logged into current session when attempting to submit reviews//////////
 
