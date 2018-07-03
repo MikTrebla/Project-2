@@ -1,0 +1,186 @@
+#main-body {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    max-width: 1200px;
+    min-width: 900px;
+    padding-top: 30px; 
+    color: rgb(200, 200, 200);
+    background-color: rgb(35, 35, 35);
+    font-family: "Gill Sans", "Gill Sans MT", "Calibri", "Trebuchet MS", sans-serif;
+    font-size: 18px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#your-review {
+    text-align: center;
+}
+
+#their-re {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    overflow: scroll;
+    background-color: rgb(20, 20, 20); 
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-right: 30px; 
+    margin-bottom: 30px; 
+}
+
+#their-top {
+    background-color: black; 
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-right: 30px;
+    font-weight: bolder;
+    font-size: 22px;
+    padding: 10px;
+}
+
+#their-profile {
+    border-radius: 5px;
+}
+
+#their-comment {
+    padding: 10px;
+    padding-top: 0px;
+    padding-left: 0px; 
+    margin: 5px;
+    margin-left: 5px;
+}
+
+#their-pic {
+    min-width: 50px;
+    max-width: 80px;
+    padding-top: 20px;
+}
+
+#their-user{
+    overflow: wrap;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    text-align: center;
+    padding: 20px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 5px;
+    font-size: 15px;
+    font-style: italic;
+}
+
+#r-title {
+    font-weight: bold;
+    font-size: 130%;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#r-score {
+    font-size: 110%;
+}
+
+#r-comment {
+    font-size: 90%;
+}
+
+.center {
+    text-align: center;
+}
+
+.left {
+    text-align: left;
+}
+
+#ur-title {
+    font-weight: bold;
+    padding-bottom: 15px;
+}
+
+div.stars {
+    display: inline-block;
+}
+  
+input.star {
+    display: none;
+}
+  
+label.star {
+    float: right;
+    padding: 10px;
+    font-size: 35px;
+    color: #444;
+    transition: all .2s;
+}
+  
+input.star:checked ~ label.star:before {
+    content:"\f005";
+    color: #FFC400;
+    transition: all .25s;
+}
+  
+input.star-5:checked ~ label.star:before {
+    color: #19FFD3;
+    text-shadow: 0 0 20px #952;
+}
+  
+input.star-1:checked ~ label.star:before {
+    color: #C414CC;
+}
+  
+label.star:hover {
+    transform: rotate(-5deg) scale(1.3);
+}
+  
+label.star:before {
+    content:"\f006";
+    font-family: FontAwesome;
+}
+
+#big-box {
+    padding: 10px;
+}
+
+.myReview {
+    background-color: rgb(70, 70, 70);
+    border-radius: 5px;
+    width: 100%;
+    max-width: 370px;
+    height: 100%;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 15px;
+    overflow-x: hidden;
+}
+
+#myTitle, select, #myComment{
+    color: rgb(200, 200, 200);
+}
+
+#myComment:focus, #myTitle:focus {
+    color: rgb(200, 200, 200);
+}
+
+#myTitle {
+    height: 10px;
+}
+
+#myComment {
+    padding-bottom: 200px;
+}
+
+#submit-review {
+    height: 30px;
+    width: 100px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(120, 120, 120); 
+    color: rgb(200, 200, 200);
+    font-weight: bold;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.less {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
