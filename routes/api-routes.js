@@ -30,7 +30,7 @@ module.exports = function (app) {
         client.games({
                 search: req.params.gameName,
                 limit: 1,
-                fields : '*' 
+                fields: '*'
             }, )
             .then((response) => {
                 console.log(response);
@@ -46,7 +46,7 @@ module.exports = function (app) {
                     release_dates: newDay,
                     rating: response.body[0].rating,
                     cover: response.body[0].cover.url,
-                    summary : response.body[0].summary,
+                    summary: response.body[0].summary,
                 }
                 console.log(list);
                 res.render('game', list);
@@ -177,12 +177,22 @@ module.exports = function (app) {
                 // var day = d.toISOString();
                 // newDay = day.slice(0, 10);
                 var body = response.body;
+                console.log(body);
                 var games = [];
                 for (var i = 0; i < body.length; i++) {
-                    var gameObj = {
-                        id: body[i].id,
-                        name: body[i].name,
-                        cover: body[i].cover.url
+                    if (!body[i].cover.url) {
+                        var placeholder = '../img/placeholder.png'
+                        var gameObj = {
+                            id: body[i].id,
+                            name: body[i].name,
+                            cover: placeholder
+                        }
+                    } else {
+                        var gameObj = {
+                            id: body[i].id,
+                            name: body[i].name,
+                            cover: body[i].cover.url
+                        }
                     }
                     games.push(gameObj);
                 }
@@ -194,14 +204,14 @@ module.exports = function (app) {
             });
     })
 
-    app.post("/game/:id/review", (req, res) =>{
-        db.Post.create({
-            title: req.body.title,
-            rating: req.body.rating,
-            body: req.body.body,
-            gameId: req.params.id
-        })
-        }).then();
+    // app.post("/game/:id/review", (req, res) =>{
+    //     db.Post.create({
+    //         title: req.body.title,
+    //         rating: req.body.rating,
+    //         body: req.body.body,
+    //         gameId: req.params.id
+    //     })
+    //     }).then();
 
     //to populate reviews per game
     app.get('/game/:game/reviews', (req, res) => {
