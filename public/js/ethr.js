@@ -45,13 +45,40 @@ $(document).ready(() => {
         alert('Sorry, account was not found. Please make sure you typed in the correct credentials.')
         window.location.replace('/signin');
       } else {
+<<<<<<< HEAD
         window.location.href="/";
         console.log(data);
+=======
+        window.location.href = "/profile/" + user.screen_name.toLowerCase();
+>>>>>>> ea88eeaba0251126a1ccc718443286d74311ea60
       }
     });
   });
 
 
+<<<<<<< HEAD
+=======
+  $('#search_btn').click(event => {
+    event.preventDefault();
+    var query = $('#search_bar').val().trim()
+    console.log(query);
+
+    $.get('/search/' + query).then(data => {
+      console.log('received')
+      window.location.replace('/search/' + query)
+      
+    })
+
+  });
+
+
+
+
+
+
+
+
+>>>>>>> ea88eeaba0251126a1ccc718443286d74311ea60
 });
 
 

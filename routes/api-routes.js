@@ -25,8 +25,6 @@ module.exports = function (app) {
             });
     });
 
-<<<<<<< HEAD
-=======
     //*****need feedback from Alex on how to do api searches on single game titles****
     app.get('/game/:game', (req, res) => {
         client.games({
@@ -63,7 +61,6 @@ module.exports = function (app) {
                 throw error;
             });
     });
->>>>>>> alex6
 
 
 
