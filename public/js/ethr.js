@@ -2,22 +2,7 @@ $(document).ready(() => {
   console.log("ready!");
   var gameName;
 
-  //this will allows slideshow to go to next automatically every 3.5s
-  var slideIndex = 0;
-  showSlides();
-  function showSlides() {
-    var i;
-    var slides = document.getElementsByClassName("mySlides");
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-    }
-    slideIndex++;
-    if (slideIndex > slides.length) {
-      slideIndex = 1
-    }
-    slides[slideIndex - 1].style.display = "block";
-    setTimeout(showSlides, 3500); 
-  }
+  
   
   $("#register").click((event) => {
 
@@ -84,6 +69,7 @@ $(document).ready(() => {
   $(document).on('click', '.games', function (event) {
     event.preventDefault();
     var gameName = $(this).attr('id');
+    console.log(gameName);
     $.get('/game/search/' + gameName).then(data => {
       window.location.href = '/game/search/' + gameName;
     })
