@@ -28,6 +28,7 @@
 }
 
 .game-posters {
+    max-width: 100px;
     border-radius: 5px;
 }
 
