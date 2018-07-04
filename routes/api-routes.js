@@ -203,13 +203,13 @@ module.exports = function (app) {
     });
 
     //to populate reviews per game
-    app.get('/game/:game/reviews', (req, res) => {
+    app.get('/game/search/:game/reviews', (req, res) => {
         db.Post.findAll({
             where: {
                 gameId: req.params.id
             }
         }).then((dbPost) => {
-            consol.log(dbPost);
+            res.render("review", dbPost);
         })
 
     })
