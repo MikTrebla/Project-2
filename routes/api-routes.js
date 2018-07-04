@@ -132,6 +132,10 @@ module.exports = function (app) {
                     .catch(error => {
                         res.json(error);
                     });
+            } else if(indexof(req.body.password.length) < 8){
+                return res.send(
+                    "Please choose a password longer than 8 characters."
+                );
             } else {
                 db.User.create({
                         screen_name: req.body.screen_name,
