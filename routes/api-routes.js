@@ -132,6 +132,10 @@ module.exports = function (app) {
                     .catch(error => {
                         res.json(error);
                     });
+            } else if(indexof(req.body.password.length) < 8){
+                return res.send(
+                    "Please choose a password longer than 8 characters."
+                );
             } else {
                 db.User.create({
                         screen_name: req.body.screen_name,
@@ -203,13 +207,13 @@ module.exports = function (app) {
     });
 
     //to populate reviews per game
-    app.get('/game/:game/reviews', (req, res) => {
+    app.get('/game/search/:game/reviews', (req, res) => {
         db.Post.findAll({
             where: {
                 gameId: req.params.id
             }
         }).then((dbPost) => {
-            consol.log(dbPost);
+            res.render("review", dbPost);
         })
 
     })

@@ -2,8 +2,8 @@ $(document).ready(() => {
   console.log("ready!");
   var gameName;
 
-  
-  
+
+
   $("#register").click((event) => {
 
     // event.preventDefault();
@@ -25,8 +25,12 @@ $(document).ready(() => {
       if (data === 'Sorry, this username is already taken! Please choose another.') {
         alert('Sorry this username is taken');
         window.location.replace('/register');
+      } else if (data === "Please choose a password longer than 8 characters.") {
+        alert("Please choose a password longer than 8 characters.");
+        window.location.replace('/register');
       } else {
-        window.location.href = "/login";
+        alert("Welcome!" + user.screen_name);
+        window.location.href = "/signin";
       }
     });
   });
@@ -85,9 +89,19 @@ $(document).ready(() => {
 
     $.post("/game/" + gameName + "/review", review).then(data => {
       console.log("review added" + data);
-      window.location.replace()
+      window.location.replace("/game/search/" + gameName + "/reviews");
     })
 
+  });
+
+  $(document).on('click', '#take-me-there', function (event) {
+    event.preventDefault();
+    var title = document.getElementById('game-title');
+    game = title.textContent
+    console.log(game);
+    $.get('/game/search/' + game + "/reviews").then(data => {
+      window.location.href = '/game/search/' + game + "/reviews";
+    })
   });
 
 });
