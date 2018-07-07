@@ -30,7 +30,7 @@ $(document).ready(() => {
         window.location.replace('/register');
       } else {
         alert("Welcome!" + user.screen_name);
-        window.location.href = "/signin";
+        window.location.href = "/signin/";
       }
     });
   });
@@ -45,17 +45,20 @@ $(document).ready(() => {
         .val()
         .trim()
     };
-
+    if (user.screen_name === ""|| user.password ===""){
+      alert("Please enter a Username or Password.");
+    }else{
     $.post("/signin", user).then((data) => {
       console.log("logging in user", data);
       if (data === 'Sorry, account was not found.') {
         alert('Sorry, account was not found. Please make sure you typed in the correct credentials.')
         window.location.replace('/signin');
       } else {
-        window.location.href = "/";
+        window.location.href = "/user/";
         console.log(data);
       }
     });
+    }
   });
 
   $('#search_btn').click(event => {

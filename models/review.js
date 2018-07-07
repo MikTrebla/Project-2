@@ -16,8 +16,8 @@ module.exports = function(sequelize, DataTypes) {
           type: DataTypes.INTEGER,
           allowNull: true,
         },
-        gameId:{
-          type: DataTypes.INTEGER,
+        gameName:{
+          type: DataTypes.STRING,
           allowNull: false,
         }
         
