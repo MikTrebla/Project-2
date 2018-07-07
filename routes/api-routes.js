@@ -5,254 +5,252 @@ const client = igdb("1ef55fd89628c4844a334b3bee9b4194");
 
 var user = require("../models/user.js");
 
-module.exports = function (app) {
+module.exports = function(app) {
+  app.get("/", (req, res) => {
+    client
+      .games(
+        {
+          fields: "name", // Return all fields
+          limit: 5, // Limit to 5 results
+          offset: 15, // Index offset for results
+          search: "halo"
+        },
+        ["name", "release_dates.date", "rating", "cover"]
+      )
+      .then(response => {
+        res.render("index");
+      })
+      .catch(error => {
+        throw error;
+      });
+  });
 
-    app.get("/", (req, res) => {
-        client
-            .games({
-                fields: "name", // Return all fields
-                limit: 5, // Limit to 5 results
-                offset: 15, // Index offset for results
-                search: "halo"
-            }, ["name", "release_dates.date", "rating", "cover"])
-            .then(response => {
-                res.render("index");
-            })
-            .catch(error => {
-                throw error;
-            });
+  app.get("/game/search/:gameName", (req, res) => {
+    client
+      .games({
+        search: req.params.gameName,
+        limit: 1,
+        fields: "*"
+      })
+      .then(response => {
+        console.log(response);
+
+        var d = new Date(response.body[0].release_dates[0].date);
+        d.toISOString();
+
+        var day = d.toISOString();
+        newDay = day.slice(0, 10);
+
+        var list = {
+          name: response.body[0].name,
+          release_dates: newDay,
+          rating: response.body[0].rating,
+          cover: response.body[0].cover.url,
+          summary: response.body[0].summary
+        };
+        console.log(list);
+        res.render("game", list);
+      })
+      .catch(error => {
+        throw error;
+      });
+  });
+
+  app.get("/user/:screen_name", (req, res) => {
+    db.User.findOne({
+      where: {
+        screen_name: req.params.screen_name
+      },
+      include: [
+        db.Post
+        // { model: db.user2game, include: [{ model: db.game }] }
+      ]
+    }).then(data => {
+      var userInfo = data.dataValues;
+
+      res.render("profile", userInfo);
     });
+  });
 
-    app.get('/game/search/:gameName', (req, res) => {
-        client.games({
-                search: req.params.gameName,
-                limit: 1,
-                fields: '*'
-            }, )
-            .then((response) => {
-                console.log(response);
+  app.get("/signin", (req, res) => {
+    res.render("signin");
+  });
 
-                var d = new Date(response.body[0].release_dates[0].date)
-                d.toISOString();
-
-                var day = d.toISOString();
-                newDay = day.slice(0, 10);
-
-                var list = {
-                    name: response.body[0].name,
-                    release_dates: newDay,
-                    rating: response.body[0].rating,
-                    cover: response.body[0].cover.url,
-                    summary: response.body[0].summary,
-                }
-                console.log(list);
-                res.render('game', list);
-
-            }).catch(error => {
-                throw error;
-            });
-    });
-
-
-
-    app.get("/user/:screen_name", (req, res) => {
-        db.User.findOne({
+  app.post("/signin", (req, res) => {
+    db.User.findOne({
+      where: {
+        screen_name: req.body.screen_name
+      }
+    }).then(results => {
+      if (
+        results.screen_name === req.body.screen_name &&
+        encrypt.decrypt(results.password) === req.body.password
+      ) {
+        var token = "t" + Math.random();
+        results.token = token;
+        res.cookie("token", token);
+        req.session.user = results;
+        results
+          .update({
+            token: token,
             where: {
-                screen_name: req.params.screen_name
-            },
-            include: [db.Post
-                // { model: db.user2game, include: [{ model: db.game }] }
-            ]
-        }).then(data => {
-            var userInfo = data.dataValues;
-
-            res.render("profile", userInfo);
-        });
-    });
-
-
-
-
-    app.get("/signin", (req, res) => {
-        res.render("signin");
-    });
-
-    app.post('/signin', (req, res) => {
-
-        db.User.findOne({
-            where: {
-                screen_name: req.body.screen_name,
+              screen_name: req.body.screen_name
             }
-        }).then(results => {
-            if (results.screen_name === req.body.screen_name && encrypt.decrypt(results.password) === req.body.password) {
-                var token = 't' + Math.random();
-                results.token = token;
-                res.cookie('token', token);
-                req.session.user = results;
-                results.update({
-                    token: token,
-                    where: {
-                        screen_name: req.body.screen_name
-                    },
-                }).then(response => {
-                    console.log(response);
-                    return res.render('', response)
-                });
+          })
+          .then(response => {
+            console.log(response);
+            return res.render("", response);
+          });
+      } else {
+        return res.send("Sorry, account was not found.");
+      }
+    });
+  });
 
-            } else {
-                return res.send('Sorry, account was not found.')
-            }
+  app.get("/register", (req, res) => {
+    res.render("register");
+  });
 
+  app.post("/register", (req, res) => {
+    db.User.findOne({
+      where: {
+        screen_name: req.body.screen_name
+      }
+    }).then(result => {
+      if (result) {
+        return res.send(
+          "Sorry, this username is already taken! Please choose another."
+        );
+      } else if (req.body.password.length < 8) {
+        return res.send("Please choose a password longer than 8 characters.");
+      } else if (req.body.image === "") {
+        db.User.create({
+          screen_name: req.body.screen_name,
+          password: encrypt.encrypt(req.body.password),
+          routeName: req.body.screen_name.replace(/\s+/g, "").toLowerCase()
         })
-    });
-
-    app.get("/register", (req, res) => {
-        res.render("register");
-    });
-
-    app.post("/register", (req, res) => {
-        db.User.findOne({
-            where: {
-                screen_name: req.body.screen_name
-            }
-        }).then(result => {
-            if (result) {
-                return res.send(
-                    "Sorry, this username is already taken! Please choose another."
-                );
-            } else if (req.body.password.length < 8) {
-                return res.send(
-                    "Please choose a password longer than 8 characters."
-                );
-            } else if (req.body.image === "") {
-                db.User.create({
-                        screen_name: req.body.screen_name,
-                        password: encrypt.encrypt(req.body.password),
-                        routeName: req.body.screen_name.replace(/\s+/g, "").toLowerCase()
-                    })
-                    .then(response => {
-                        res.json(response);
-                    })
-                    .catch(error => {
-                        res.json(error);
-                    });
-            } else {
-                db.User.create({
-                        screen_name: req.body.screen_name,
-                        password: encrypt.encrypt(req.body.password),
-                        routeName: req.body.screen_name.replace(/\s+/g, "").toLowerCase(),
-                        image: req.body.image
-                    })
-                    .then(response => {
-                        res.json(response);
-                    })
-                    .catch(error => {
-                        res.json(error);
-                    });
-            }
-        });
-    });
-
-    // app.get('/searchresults', (req, res) => {
-    //     res.render('search');
-    // })
-
-    // populate search results
-    app.get('/search/:query', (req, res) => {
-        console.log('hello');
-        client.games({
-                limit: 10,
-                search: req.params.query
-            }, [
-                "name",
-                'cover',
-                'release_dates.date',
-            ])
-            .then(response => {
-                var body = response.body;
-                var games = [];
-                for (var i = 0; i < body.length; i++) {
-                    if (!body[i].cover) {
-                        var placeholder = '../img/placeholder.png'
-                        var gameObj = {
-                            id: body[i].id,
-                            name: body[i].name,
-                            cover: placeholder
-                        }
-                    } else {
-                        var gameObj = {
-                            id: body[i].id,
-                            name: body[i].name,
-                            cover: 'https:' + body[i].cover.url
-                        }
-                    }
-                    games.push(gameObj);
-                }
-                res.render('search', games);
-
-            }).catch(error => {
-                throw error;
-            });
-    })
-
-    app.post("/game/:id/review", (req, res) => {
-        db.Post.create({
-            title: req.body.title,
-            rating: req.body.rating,
-            body: req.body.body,
-            gameId: req.params.id
-        }).then(results => {
-            res.send(results);
+          .then(response => {
+            res.json(response);
+          })
+          .catch(error => {
+            res.json(error);
+          });
+      } else {
+        db.User.create({
+          screen_name: req.body.screen_name,
+          password: encrypt.encrypt(req.body.password),
+          routeName: req.body.screen_name.replace(/\s+/g, "").toLowerCase(),
+          image: req.body.image
         })
+          .then(response => {
+            res.json(response);
+          })
+          .catch(error => {
+            res.json(error);
+          });
+      }
     });
+  });
 
-    //to populate reviews per game
-    app.get('/game/search/:game/reviews', (req, res) => {
-        db.Post.findAll({
-            where: {
-                gameId: req.params.id
-            }
-        }).then((dbPost) => {
-            res.render("review", dbPost);
-        })
+  // app.get('/searchresults', (req, res) => {
+  //     res.render('search');
+  // })
 
-    })
-
-    
-    app.get('/logout', function(req, res, next) {
-        if (req.session) {
-      // delete session object
-        req.session.destroy(function(err) {
-            if(err) {
-            return next(err);
-            } else {
-                return res.redirect('/');
-            }
-        });
+  // populate search results
+  app.get("/search/:query", (req, res) => {
+    console.log("hello");
+    client
+      .games(
+        {
+          limit: 10,
+          search: req.params.query
+        },
+        ["name", "cover", "release_dates.date"]
+      )
+      .then(response => {
+        var body = response.body;
+        var games = [];
+        for (var i = 0; i < body.length; i++) {
+          if (!body[i].cover) {
+            var placeholder = "../img/placeholder.png";
+            var gameObj = {
+              id: body[i].id,
+              name: body[i].name,
+              cover: placeholder
+            };
+          } else {
+            var gameObj = {
+              id: body[i].id,
+              name: body[i].name,
+              cover: "https:" + body[i].cover.url
+            };
+          }
+          games.push(gameObj);
         }
+        res.render("search", games);
+      })
+      .catch(error => {
+        throw error;
+      });
+  });
+
+  app.post("/game/search/:name/reviews", (req, res) => {
+    db.Post.create({
+      title: req.body.title,
+      rating: req.body.rating,
+      body: req.body.body,
+      gameName: req.params.name
+    }).then(results => {
+      res.send(results);
     });
+  });
 
-    //////////check if user is logged into current session when attempting to submit reviews//////////
+  //to populate reviews per game
+  app.post("/game/search/:name/reviews", (req, res) => {
+    if (req.session.user) {
+      db.Post.create({
+        title: req.body.title,
+        rating: req.body.rating,
+        body: req.body.body,
+        gameName: req.params.name
+      }).then(results => {
+        res.send(results);
+      });
+    } else {
+      res.send("Please signin");
+    }
+  });
 
-    // app.get('/checklogin', (req, res) => {
-    //     if (req.session.user) {
-    //         res.send(`Oh hi, it's ${req.session.user.name} again!`)
-    //     } else {
-    //         res.redirect('/login');
-    //     }
-    // });
+  app.get("/logout", function(req, res, next) {
+    if (req.session) {
+      // delete session object
+      req.session.destroy(function(err) {
+        if (err) {
+          return next(err);
+        } else {
+          return res.redirect("/");
+        }
+      });
+    }
+  });
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////check if user is logged into current session when attempting to submit reviews//////////
 
-    // app.get('/logout', (req, res) => {
+  // app.get('/checklogin', (req, res) => {
+  //     if (req.session.user) {
+  //         res.send(`Oh hi, it's ${req.session.user.name} again!`)
+  //     } else {
+  //         res.redirect('/login');
+  //     }
+  // });
 
-    // });
+  //////////////////////////////////////////////////////////////////////////////////////////////////
 
+  // app.get('/logout', (req, res) => {
 
+  // });
 
-    // app.get('/logout', (req, res) => {
-    //     res.render('index')
-    // });
-
-
-}
+  // app.get('/logout', (req, res) => {
+  //     res.render('index')
+  // });
+};

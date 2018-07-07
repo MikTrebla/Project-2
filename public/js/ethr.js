@@ -51,7 +51,7 @@ $(document).ready(() => {
         alert('Sorry, account was not found. Please make sure you typed in the correct credentials.')
         window.location.replace('/signin');
       } else {
-        window.location.href = "/";
+        window.location.href = "/user/"+user.screen_name;
         console.log(data);
       }
     });
@@ -87,8 +87,12 @@ $(document).ready(() => {
     }
 
     $.post("/game/" + gameName + "/review", review).then(data => {
-      console.log("review added" + data);
+      if(data === "Please signin"){
+        alert("You have to sign in to be able to submit reviews!");
+        window.location.href="/signin"
+      }else{console.log("review added" + data);
       window.location.replace("/game/search/" + gameName + "/reviews");
+      }
     })
 
   });
