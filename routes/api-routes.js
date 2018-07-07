@@ -120,6 +120,10 @@ module.exports = function (app) {
                 return res.send(
                     "Sorry, this username is already taken! Please choose another."
                 );
+            } else if (req.body.password.length < 8) {
+                return res.send(
+                    "Please choose a password longer than 8 characters."
+                );
             } else if (req.body.image === "") {
                 db.User.create({
                         screen_name: req.body.screen_name,
@@ -132,10 +136,6 @@ module.exports = function (app) {
                     .catch(error => {
                         res.json(error);
                     });
-            } else if(indexof(req.body.password.length) < 8){
-                return res.send(
-                    "Please choose a password longer than 8 characters."
-                );
             } else {
                 db.User.create({
                         screen_name: req.body.screen_name,

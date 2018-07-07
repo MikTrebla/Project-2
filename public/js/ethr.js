@@ -5,8 +5,7 @@ $(document).ready(() => {
 
 
   $("#register").click((event) => {
-
-    // event.preventDefault();
+    event.preventDefault();
     var user = {
       screen_name: $("#screenName")
         .val()
@@ -29,7 +28,7 @@ $(document).ready(() => {
         alert("Please choose a password longer than 8 characters.");
         window.location.replace('/register');
       } else {
-        alert("Welcome!" + user.screen_name);
+        alert("Welcome! " + user.screen_name);
         window.location.href = "/signin";
       }
     });
