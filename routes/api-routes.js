@@ -209,7 +209,7 @@ module.exports = function(app) {
   app.get("/game/search/:game/reviews", (req, res) => {
     db.Post.findAll({
       where: {
-        gameId: req.params.id
+        gameName: req.params.game
       }
     }).then(dbPost => {
       res.render("review", dbPost);
