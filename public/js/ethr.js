@@ -51,7 +51,7 @@ $(document).ready(() => {
         alert('Sorry, account was not found. Please make sure you typed in the correct credentials.')
         window.location.replace('/signin');
       } else {
-        window.location.href = "/";
+        window.location.href = "/user/"+user.screen_name;
         console.log(data);
       }
     });
@@ -78,20 +78,28 @@ $(document).ready(() => {
     })
   });
 
-  $("#submit-review").click(event => {
+  postReview = (userId) =>{
+  $(document).on("click","#submit-review",event => {
     event.preventDefault();
     var review = {
       title: $("#myTitle").val().trim(),
       rating: $("input[name=star]:checked").val(),
-      body: $("#myComment").val.trim()
+      body: $("#myComment").val().trim()
     }
-
-    $.post("/game/" + gameName + "/review", review).then(data => {
-      console.log("review added" + data);
-      window.location.replace("/game/search/" + gameName + "/reviews");
+    $.get("/checklogin");
+    $.post(window.location.pathname, review).then(data => {
+      if(data === "Please signin"){
+        alert("You have to sign in to be able to submit reviews!");
+        window.location.href="/signin"
+      }else{
+        console.log("review added" + data);
+      }
     })
 
   });
+  }
+
+
 
   $(document).on('click', '#take-me-there', function (event) {
     event.preventDefault();
@@ -105,6 +113,13 @@ $(document).ready(() => {
 
 });
 
+loggedIn=(userId)=>{
+  $.get("/api/getid",(data)=>{
+    userId = data.user;
+    postReview(userId);
+  })
+}
+loggedIn();
 
 // this is for login validation
-//   $.get("/checklogin");
+  // $.get("/checklogin");
