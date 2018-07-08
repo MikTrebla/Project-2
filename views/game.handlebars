@@ -1,23 +1,33 @@
 <link rel="stylesheet" href="/css/game.css" type="text/css" />
 
 <div id="gamePage">
-<div id="nav-sum">
-    <a class="top-link" href="/">Home</a><i class="fas fa-angle-right"></i><a class="top-link" href="javascript:history.back()">Search</a><i class="fas fa-angle-right"></i> {{this.name}}
-</div>
-<div id="game-container">
-    <div class="poster-content">
-        <img id="game-poster" src="{{cover}}" alt="{{name}}">
-        <p class="no-pads"><b>Release Date :</b> {{release_dates}}</p>
-        <p id="game-score" class="no-pads"><strong>Score :</strong> {{rating}} %</p>
-        <form action="/" method="get">
-            <input type="submit" value="See Reviews" name="Submit" id="take-me-there" />
-        </form>
+    <div id="nav-sum">
+        <a class="top-link" href="/">Home</a>
+        <i class="fas fa-angle-right"></i>
+        <a class="top-link" href="javascript:history.back()">Search</a>
+        <i class="fas fa-angle-right"></i> {{this.name}}
     </div>
-    <div class="game-content">
-        <p id="game-title" class="no-pads"><strong>{{this.name}}</strong></p>
-        <p class="no-pads"><b>Summary :</b></p><p>{{summary}}</p>
+    <div id="game-container">
+        <div class="poster-content">
+            <img id="game-poster" src="{{cover}}" alt="{{name}}">
+            <p class="no-pads">
+                <b>Release Date :</b> {{release_dates}}</p>
+            <p id="game-score" class="no-pads">
+                <strong>Score :</strong> {{rating}} %</p>
+            <form action="/" method="get">
+                <input type="submit" value="See Reviews" name="Submit" id="take-me-there" />
+            </form>
+        </div>
+        <div class="game-content">
+            <p id="game-title" class="no-pads">
+                <strong>{{this.name}}</strong>
+            </p>
+            <p class="no-pads">
+                <b>Summary :</b>
+            </p>
+            <p>{{summary}}</p>
+        </div>
     </div>
-</div>
 
 </div>
 </div>

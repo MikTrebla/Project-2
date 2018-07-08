@@ -5,18 +5,15 @@ const client = igdb("1ef55fd89628c4844a334b3bee9b4194");
 
 var user = require("../models/user.js");
 
-module.exports = function(app) {
+module.exports = function (app) {
   app.get("/", (req, res) => {
     client
-      .games(
-        {
-          fields: "name", // Return all fields
-          limit: 5, // Limit to 5 results
-          offset: 15, // Index offset for results
-          search: "halo"
-        },
-        ["name", "release_dates.date", "rating", "cover"]
-      )
+      .games({
+        fields: "name", // Return all fields
+        limit: 5, // Limit to 5 results
+        offset: 15, // Index offset for results
+        search: "halo"
+      }, ["name", "release_dates.date", "rating", "cover"])
       .then(response => {
         res.render("index");
       })
@@ -125,10 +122,10 @@ module.exports = function(app) {
         return res.send("Please choose a password longer than 8 characters.");
       } else if (req.body.image === "") {
         db.User.create({
-          screen_name: req.body.screen_name,
-          password: encrypt.encrypt(req.body.password),
-          routeName: req.body.screen_name.replace(/\s+/g, "").toLowerCase()
-        })
+            screen_name: req.body.screen_name,
+            password: encrypt.encrypt(req.body.password),
+            routeName: req.body.screen_name.replace(/\s+/g, "").toLowerCase()
+          })
           .then(response => {
             res.json(response);
           })
@@ -137,11 +134,11 @@ module.exports = function(app) {
           });
       } else {
         db.User.create({
-          screen_name: req.body.screen_name,
-          password: encrypt.encrypt(req.body.password),
-          routeName: req.body.screen_name.replace(/\s+/g, "").toLowerCase(),
-          image: req.body.image
-        })
+            screen_name: req.body.screen_name,
+            password: encrypt.encrypt(req.body.password),
+            routeName: req.body.screen_name.replace(/\s+/g, "").toLowerCase(),
+            image: req.body.image
+          })
           .then(response => {
             res.json(response);
           })
@@ -160,13 +157,10 @@ module.exports = function(app) {
   app.get("/search/:query", (req, res) => {
     console.log("hello");
     client
-      .games(
-        {
-          limit: 10,
-          search: req.params.query
-        },
-        ["name", "cover", "release_dates.date"]
-      )
+      .games({
+        limit: 10,
+        search: req.params.query
+      }, ["name", "cover", "release_dates.date"])
       .then(response => {
         var body = response.body;
         var games = [];
@@ -224,20 +218,18 @@ module.exports = function(app) {
 
   app.get("/game/search/:name/reviews", (req, res) => {
     db.Post.findAll({
-      where:{
-        gameName:req.params.name
+      where: {
+        gameName: req.params.name
       }
-    }).then((results)=>{
-          res.render("review", results);
-    })
-
+    }).then(results => {
+      res.render("review", results);
+    });
   });
 
-
-  app.get("/logout", function(req, res, next) {
+  app.get("/logout", function (req, res, next) {
     if (req.session) {
       // delete session object
-      req.session.destroy(function(err) {
+      req.session.destroy(function (err) {
         if (err) {
           return next(err);
         } else {
@@ -249,18 +241,17 @@ module.exports = function(app) {
 
   //////////check if user is logged into current session when attempting to submit reviews//////////
 
-  app.get('/checklogin', (req, res) => {
-      if (req.session.user) {
-          res.send(`Oh hi, it's ${req.session.user.name} again!`)
-      } else {
-          res.redirect('/login');
-      }
+  app.get("/checklogin", (req, res) => {
+    if (req.session.user) {
+      res.send(`Oh hi, it's ${req.session.user.name} again!`);
+    } else {
+      res.redirect("/login");
+    }
   });
 
-
-    app.get("/api/getid/", function (req,res){
-        res.send(req.session);
-    })
+  app.get("/api/getid/", function (req, res) {
+    res.send(req.session);
+  });
   //////////////////////////////////////////////////////////////////////////////////////////////////
 
   // app.get('/logout', (req, res) => {
