@@ -24,9 +24,11 @@
                 <u>Reviews from {{screen_name}}</u>
             </h1>
             {{#each Posts}}
-            <h2>{{title}}</h2>
+            <h2>Title : {{title}}</h2>
+            <p>Review : {{body}}</p>
             <br>
             <button class="delete-post" data-id="{{this.id}}">Delete Review</button>
+            <button class="edit-post" data-id="{{this.id}}">Edit Review</button>
             {{/each}}
         </div>
 
