@@ -194,16 +194,16 @@ module.exports = function(app) {
       });
   });
 
-  app.post("/game/search/:name/reviews", (req, res) => {
-    db.Post.create({
-      title: req.body.title,
-      rating: req.body.rating,
-      body: req.body.body,
-      gameName: req.params.name
-    }).then(results => {
-      res.send(results);
-    });
-  });
+  // app.post("/game/search/:name/reviews", (req, res) => {
+  //   db.Post.create({
+  //     title: req.body.title,
+  //     rating: req.body.rating,
+  //     body: req.body.body,
+  //     gameName: req.params.name
+  //   }).then(results => {
+  //     res.send(results);
+  //   });
+  // });
 
   //to populate reviews per game
   app.post("/game/search/:name/reviews", (req, res) => {
@@ -212,14 +212,27 @@ module.exports = function(app) {
         title: req.body.title,
         rating: req.body.rating,
         body: req.body.body,
-        gameName: req.params.name
+        gameName: req.params.name,
+        UserId: req.session.user.id
       }).then(results => {
-        res.send(results);
+        res.json(results);
       });
     } else {
       res.send("Please signin");
     }
   });
+
+  app.get("/game/search/:name/reviews", (req, res) => {
+    db.Post.findAll({
+      where:{
+        gameName:req.params.name
+      }
+    }).then((results)=>{
+          res.render("review", results);
+    })
+
+  });
+
 
   app.get("/logout", function(req, res, next) {
     if (req.session) {
@@ -236,14 +249,18 @@ module.exports = function(app) {
 
   //////////check if user is logged into current session when attempting to submit reviews//////////
 
-  // app.get('/checklogin', (req, res) => {
-  //     if (req.session.user) {
-  //         res.send(`Oh hi, it's ${req.session.user.name} again!`)
-  //     } else {
-  //         res.redirect('/login');
-  //     }
-  // });
+  app.get('/checklogin', (req, res) => {
+      if (req.session.user) {
+          res.send(`Oh hi, it's ${req.session.user.name} again!`)
+      } else {
+          res.redirect('/login');
+      }
+  });
 
+
+    app.get("/api/getid/", function (req,res){
+        res.send(req.session);
+    })
   //////////////////////////////////////////////////////////////////////////////////////////////////
 
   // app.get('/logout', (req, res) => {
