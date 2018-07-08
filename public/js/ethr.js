@@ -113,6 +113,9 @@ $(document).ready(() => {
       window.location.href = "/game/search/" + game + "/reviews";
     });
   });
+
+
+  
 });
 
 loggedIn = userId => {
