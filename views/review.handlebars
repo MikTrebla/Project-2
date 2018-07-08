@@ -37,6 +37,7 @@
 
     <div>
         <div id="their-top">User's Reviews:</div>
+        {{#each this}}
         <div id="their-re">
             <div id="their-profile" class="center">
                 <img id="their-pic" src={{image}} alt="username" />
@@ -48,5 +49,6 @@
                 <p id="r-comment">{{body}}</p>
             </div>
         </div>
+        {{/each}}
     </div>
 </div>
