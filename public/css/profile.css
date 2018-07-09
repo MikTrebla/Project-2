@@ -1,0 +1,87 @@
+.name {
+    font-family: "Teko", sans-serif;
+    color: #e2e2e2;
+}
+
+.title {
+    font-family: "Teko", sans-serif;
+    color: #e2e2e2;
+    text-align: center;
+    padding: 10px;
+    padding-top: 20px;
+    margin: 0px;
+    margin-top: 20px;
+    border-bottom-left-radius: 5px;
+    min-height: 150px;
+    height: auto;
+}
+
+.user {
+    width: 250px;
+    background-color: rgb(15, 15, 15);
+    text-align: center;
+    display: inline-block;
+    border-bottom-left-radius: 5px;
+}
+
+.gamePreview {
+    width: 200px;
+}
+
+#profilePic {
+    width: 200px;
+    height: auto;
+    border-radius: 5px;
+}
+
+#gameView {
+    width: 250px;
+    text-align: center;
+}
+
+#top-head {
+    background-color: #191919;
+    margin: 0px;
+    padding-top: 20px;
+    padding: 15px;
+}
+
+.wrapper {
+    width: 100%;
+    margin: auto;
+    display: flex;
+}
+
+.smol {
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.reviews {
+    background-color: rgb(35, 35, 35);
+    color: #e2e2e2;
+    width: 100%;
+    font-family: "Teko", sans-serif;
+    font-size: x-large;
+    border-bottom-right-radius: 5px;
+} 
+
+.pads {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 7px;
+}
+
+.delete-post, .edit-post {
+    background-color: rgb(15, 15, 15);
+    color: #e2e2e2;
+    padding: 10px;
+    width: 100px;
+    border-radius: 5px;
+    border-style: hidden;
+    margin-right: 5px;
+}
+
+p {
+    font-size: 18px;
+}

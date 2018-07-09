@@ -79,55 +79,6 @@ img {
     padding-right: 17%;
 } */
 
-.name {
-    font-family: "Teko", sans-serif;
-    color: #e2e2e2;
-}
-
-.title {
-    font-family: "Teko", sans-serif;
-    color: #e2e2e2;
-    width: 200px;
-}
-
-.user {
-    width: 250px;
-    background-color: #191919;
-    text-align: center;
-    border: 1px solid #e2e2e2;
-    display: inline-block;
-}
-
-.gamePreview {
-    width: 200px;
-}
-
-#profilePic {
-    width: 200px;
-    height: auto;
-}
-
-#gameView {
-    width: 250px;
-}
-
-.wrapper {
-    width: 100%;
-    margin: auto;
-    display: flex;
-}
-
-.reviews {
-    background-color: #191919;
-    color: #e2e2e2;
-    border: 1px solid #e2e2e2;
-    width: 100%;
-    padding-left: 10px;
-    font-family: "Teko", sans-serif;
-    font-size: x-large;
-} 
-
-
 body {
     background-color: #333;
     display: flex;

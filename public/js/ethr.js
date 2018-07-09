@@ -99,7 +99,7 @@ $(document).ready(() => {
             window.location.reload();
           });
         } else {
-          alert('You must be logged in to submit a review! Redirecting to login page...')
+          alert('You must be logged in to submit a review! Redirecting to the login page...')
           window.location.href = '/signin'
         }
       })
@@ -134,25 +134,28 @@ $(document).ready(() => {
   //this is to toggle edit review mode
   // $(document).on('click', '.toggle-edit', function (event) {
   //   event.preventDefault();
- 
-    
+
+
   // })
 
 
   //this is to submit review  on click on the edit review mode
-  // $(document).on('click', '.edit-post', function (event) {
-  //   event.preventDefault();
-  //   var id = $(this).attr('id');
-  //   var name = $(this).attr('name');
-  //   $.ajax({
-  //     type: 'PUT',
-  //     url: '/review/edit/' + name + '/' + id,
-  //     success: function (response) {
-  //       console.log('edited');
-  //       window.location.reload();
-  //     }
-  //   })
-  // })
+  $(document).on('click', '.edit-post', function (event) {
+    event.preventDefault();
+    var review = {
+      id : $(this).attr('id'),
+      name : $(this).attr('name')
+      // rating :$(this).
+    }
+    $.ajax({
+      type: 'PUT',
+      url: '/review/edit/' + name + '/' + id,
+      success: function (response) {
+        console.log('edited');
+        window.location.reload();
+      }
+    })
+  })
 
 
 

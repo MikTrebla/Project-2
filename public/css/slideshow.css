@@ -5,6 +5,8 @@
   max-width: 1000px;
   position: relative;
   margin: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /* Hide the images by default */

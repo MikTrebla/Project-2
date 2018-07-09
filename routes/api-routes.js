@@ -7,19 +7,10 @@ var user = require("../models/user.js");
 
 module.exports = function (app) {
     app.get("/", (req, res) => {
-        client
-            .games({
-                fields: "name", // Return all fields
-                limit: 5, // Limit to 5 results
-                offset: 15, // Index offset for results
-                search: "halo"
-            }, ["name", "release_dates.date", "rating", "cover"])
-            .then(response => {
-                res.render("index");
-            })
-            .catch(error => {
-                throw error;
-            });
+        db.Post.findAll().then(results => {
+            console.log(results);
+            res.render('index', results);
+        })
     });
 
     app.get("/game/search/:gameName", (req, res) => {
@@ -148,11 +139,6 @@ module.exports = function (app) {
         });
     });
 
-    // app.get('/searchresults', (req, res) => {
-    //     res.render('search');
-    // })
-
-    // populate search results
     app.get("/search/:query", (req, res) => {
         console.log("hello");
         client
@@ -187,18 +173,9 @@ module.exports = function (app) {
             });
     });
 
-    // app.post("/game/search/:name/reviews", (req, res) => {
-    //   db.Post.create({
-    //     title: req.body.title,
-    //     rating: req.body.rating,
-    //     body: req.body.body,
-    //     gameName: req.params.name
-    //   }).then(results => {
-    //     res.send(results);
-    //   });
-    // });
 
-    //to populate reviews per game
+
+
     app.post("/game/search/:name/reviews", (req, res) => {
         if (req.session.user) {
             db.Post.create({
@@ -219,8 +196,13 @@ module.exports = function (app) {
         db.Post.findAll({
             where: {
                 gameName: req.params.name
-            }
+            },
+            include: [
+                db.User
+                // { model: db.user2game, include: [{ model: db.game }] }
+            ]
         }).then(results => {
+            console.log(results);
             res.render("review", results);
         });
     });
@@ -242,12 +224,23 @@ module.exports = function (app) {
         db.Post.destroy({
             where: {
                 id: req.params.id,
-                gameName : req.params.name
+                gameName: req.params.name
             }
         }).then(response => {
             res.json(response);
         })
-    })
+    });
+
+    app.put('/review/edit/:name/:id', (req, res) => {
+        db.Post.update({
+            where: {
+                id: req.params.id,
+                gameName: req.params.name
+            }
+        }).then(response => {
+            res.render('edit', response);
+        })
+    });
 
     //////////check if user is logged into current session when attempting to submit reviews//////////
 
