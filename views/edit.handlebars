@@ -2,11 +2,10 @@
 <link rel="stylesheet" href="/css/review.css" type="text/css" />
 <div id="your-review">
     <form>
-        <div id="ur-title">Write your Review:</div>
+        <div class = 'userReview' id="{{User.dataValues.screen_name}}">{{User.dataValues.screen_name}}'s Review for {{dataValues.gameName}}</div>
         <div>
-            <input id="myTitle" class="myReview" placeholder={{title}} />
+            <input id="myTitle" class="myReview" placeholder=Title value={{~dataValues.title~}}>
         </div>
-
         <div id="big-box">
             <div class="stars">
                 <form action="Myrating" name="rating">
@@ -25,9 +24,10 @@
         </div>
 
         <div>
-            <textarea id="myComment" class="myReview" placeholder="Review" rows="4"></textarea>
+            <textarea id="myComment" class="myReview" placeholder="Review" rows="4">
+                {{~dataValues.body~}}
+            </textarea>
         </div>
-
-        <input type="submit" value="Submit" id="submit-review">
+        <input type="submit" value="Edit" class="edit-review" id='{{dataValues.id}}'>
     </form>
 </div>

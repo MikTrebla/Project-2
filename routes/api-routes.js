@@ -231,14 +231,31 @@ module.exports = function (app) {
         })
     });
 
-    app.put('/review/edit/:name/:id', (req, res) => {
+    app.get('/review/edit/:id', (req, res) => {
+        db.Post.findOne({
+            where: {
+                id: req.params.id
+            },
+            include: [
+                db.User
+            ]
+        }).then(result => {
+            console.log(result);
+            res.render('edit', result)
+        })
+    })
+
+    app.put('/submitreview/edit/:id', (req, res) => {
         db.Post.update({
+            title: req.body.title,
+            body: req.body.body,
+            rating: req.body.rating
+        }, {
             where: {
                 id: req.params.id,
-                gameName: req.params.name
             }
         }).then(response => {
-            res.render('edit', response);
+            res.json(response);
         })
     });
 
