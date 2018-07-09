@@ -7,7 +7,7 @@ var user = require("../models/user.js");
 
 module.exports = function (app) {
     app.get("/", (req, res) => {
-        db.Post.findAll().then(results => {
+        db.Post.findAll({}).then(results => {
             console.log(results);
             res.render('index', results);
         })

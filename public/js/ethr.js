@@ -121,25 +121,22 @@ $(document).ready(() => {
     event.preventDefault();
     var id = $(this).attr('id');
     var name = $(this).attr('name');
-    $.ajax({
-      type: 'DELETE',
-      url: '/review/delete/' + name + '/' + id,
-      success: function (response) {
-        console.log('deleted');
-        window.location.reload();
-      }
-    });
+    if (results === 'user already logged') {
+      $.ajax({
+        type: 'DELETE',
+        url: '/review/delete/' + name + '/' + id,
+        success: function (response) {
+          console.log('deleted');
+          window.location.reload();
+        }
+      });
+    } else {
+      alert('You must be logged in to edit a review! Redirecting to the login page...')
+      window.location.href = '/signin'
+    }
   });
 
-  //this is to toggle edit review mode
-  // $(document).on('click', '.toggle-edit', function (event) {
-  //   event.preventDefault();
 
-
-  // })
-
-
-  //this is to submit review  on click on the edit review mode
   $(document).on('click', '.edit-review', function (event) {
     event.preventDefault();
     var newReview = {
@@ -151,13 +148,11 @@ $(document).ready(() => {
     }
     $.get("/checklogin").then(results => {
       if (results === 'user already logged') {
-        console.log(results);
         $.ajax({
           type: 'PUT',
           data: newReview,
           url: '/submitreview/edit/' + newReview.id,
           success: function (response) {
-            console.log(response);
             window.location.href = '/user/' + newReview.screen_name
           }
         })
@@ -171,10 +166,15 @@ $(document).ready(() => {
   $(document).on('click', '.edit-post', function (event) {
     event.preventDefault();
     var id = $(this).attr('id')
-    $.get('/review/edit/' + id).then(result => {
-      window.location.href = "/review/edit/" + id;
-    })
+    if (results === 'user already logged') {
 
+      $.get('/review/edit/' + id).then(result => {
+        window.location.href = "/review/edit/" + id;
+      })
+    } else {
+      alert('You must be logged in to edit a review! Redirecting to the login page...')
+      window.location.href = '/signin'
+    }
 
   })
 
