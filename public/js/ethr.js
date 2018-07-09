@@ -1,6 +1,8 @@
 $(document).ready(() => {
-  console.log("ready!");
-  var gameName;
+  $('#profile').click(event => {
+    event.preventDefault();
+    
+  })
 
   $("#register").click(event => {
     event.preventDefault();
@@ -15,10 +17,8 @@ $(document).ready(() => {
         .val()
         .trim()
     };
-    console.log(event);
 
     $.post("/register", user).then(data => {
-      console.log("add user", data);
       if (
         data === "Sorry, this username is already taken! Please choose another."
       ) {
@@ -48,7 +48,6 @@ $(document).ready(() => {
     };
 
     $.post("/signin", user).then(data => {
-      console.log("logging in user", data);
       if (data === "Sorry, account was not found.") {
         alert(
           "Sorry, account was not found. Please make sure you typed in the correct credentials."
@@ -56,7 +55,6 @@ $(document).ready(() => {
         window.location.replace("/signin");
       } else {
         window.location.href = "/user/" + user.screen_name;
-        console.log(data);
       }
     });
   });
@@ -66,7 +64,6 @@ $(document).ready(() => {
     var query = $("#search_bar").val();
 
     $.get("/search/" + query).then(data => {
-      console.log("received request");
       window.location.href = "/search/" + query;
     });
   });
@@ -74,7 +71,6 @@ $(document).ready(() => {
   $(document).on("click", ".games", function (event) {
     event.preventDefault();
     var gameName = $(this).attr("id");
-    console.log(gameName);
     $.get("/game/search/" + gameName).then(data => {
       window.location.href = "/game/search/" + gameName;
     });
@@ -95,7 +91,6 @@ $(document).ready(() => {
       $.get("/checklogin").then(results => {
         if (results === 'user already logged') {
           $.post(window.location.pathname, review).then(data => {
-            console.log("review added" + data);
             window.location.reload();
           });
         } else {
@@ -111,7 +106,6 @@ $(document).ready(() => {
     event.preventDefault();
     var title = document.getElementById("game-title");
     game = title.textContent;
-    console.log(game);
     $.get("/game/search/" + game + "/reviews").then(data => {
       window.location.href = "/game/search/" + game + "/reviews";
     });
@@ -126,7 +120,6 @@ $(document).ready(() => {
         type: 'DELETE',
         url: '/review/delete/' + name + '/' + id,
         success: function (response) {
-          console.log('deleted');
           window.location.reload();
         }
       });
@@ -189,5 +182,3 @@ loggedIn = userId => {
 };
 loggedIn();
 
-// this is for login validation
-// $.get("/checklogin");

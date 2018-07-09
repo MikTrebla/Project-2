@@ -2,8 +2,8 @@
 const session = require('express-session');
 const crypto = require('crypto');
 
-const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || "qw~rty+iop$kjhg5dsazx!vbnm*wert5" // Must be 256 bytes (32 characters)
-const IV_LENGTH = 16; // For AES, this is always 16
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || "qw~rty+iop$kjhg5dsazx!vbnm*wert5" 
+const IV_LENGTH = 16; 
 
 
 const express = require("express");
