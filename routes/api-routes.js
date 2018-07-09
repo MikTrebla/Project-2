@@ -238,7 +238,7 @@ module.exports = function (app) {
         }
     });
 
-    app.delete('/game/delete/:name/:id', (req, res) => {
+    app.delete('/review/delete/:name/:id', (req, res) => {
         db.Post.destroy({
             where: {
                 id: req.params.id,

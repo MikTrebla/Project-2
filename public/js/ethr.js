@@ -122,7 +122,7 @@ $(document).ready(() => {
     console.log(id);
     $.ajax({
       type: 'DELETE',
-      url: '/game/delete/' + name + '/' + id,
+      url: '/review/delete/' + name + '/' + id,
       success: function (response) {
         console.log('deleted');
         window.location.reload();
