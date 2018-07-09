@@ -140,19 +140,22 @@ $(document).ready(() => {
 
 
   //this is to submit review  on click on the edit review mode
-  // $(document).on('click', '.edit-post', function (event) {
-  //   event.preventDefault();
-  //   var id = $(this).attr('id');
-  //   var name = $(this).attr('name');
-  //   $.ajax({
-  //     type: 'PUT',
-  //     url: '/review/edit/' + name + '/' + id,
-  //     success: function (response) {
-  //       console.log('edited');
-  //       window.location.reload();
-  //     }
-  //   })
-  // })
+  $(document).on('click', '.edit-post', function (event) {
+    event.preventDefault();
+    var review = {
+      id : $(this).attr('id'),
+      name : $(this).attr('name')
+      // rating :$(this).
+    }
+    $.ajax({
+      type: 'PUT',
+      url: '/review/edit/' + name + '/' + id,
+      success: function (response) {
+        console.log('edited');
+        window.location.reload();
+      }
+    })
+  })
 
 
 

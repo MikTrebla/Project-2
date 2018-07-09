@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/review.css" type="text/css" />
+<div id="your-review">
+    <form>
+        <div id="ur-title">Write your Review:</div>
+        <div>
+            <input id="myTitle" class="myReview" placeholder={{title}} />
+        </div>
+
+        <div id="big-box">
+            <div class="stars">
+                <form action="Myrating" name="rating">
+                    <input value="5" class="star star-5" id="star-5" type="radio" name="star" />
+                    <label class="star star-5" for="star-5" value="5"></label>
+                    <input value="4" class="star star-4" id="star-4" type="radio" name="star" />
+                    <label class="star star-4" for="star-4" value="4"></label>
+                    <input value="3" class="star star-3" id="star-3" type="radio" name="star" />
+                    <label class="star star-3" for="star-3" value="3"></label>
+                    <input value="2" class="star star-2" id="star-2" type="radio" name="star" />
+                    <label class="star star-2" for="star-2" value="2"></label>
+                    <input value="1" class="star star-1" id="star-1" type="radio" name="star" />
+                    <label class="star star-1" for="star-1" value="1"></label>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <textarea id="myComment" class="myReview" placeholder="Review" rows="4"></textarea>
+        </div>
+
+        <input type="submit" value="Submit" id="submit-review">
+    </form>
+</div>
