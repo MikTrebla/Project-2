@@ -95,15 +95,15 @@ $(document).ready(() => {
       $.get("/checklogin").then(results => {
         if (results === 'user already logged') {
           $.post(window.location.pathname, review).then(data => {
-              console.log("review added" + data);
-              window.location.reload();
+            console.log("review added" + data);
+            window.location.reload();
           });
         } else {
           alert('You must be logged in to submit a review! Redirecting to login page...')
           window.location.href = '/signin'
         }
       })
-      
+
     });
   };
 
@@ -128,8 +128,33 @@ $(document).ready(() => {
         console.log('deleted');
         window.location.reload();
       }
-    })
-  })
+    });
+  });
+
+  //this is to toggle edit review mode
+  // $(document).on('click', '.toggle-edit', function (event) {
+  //   event.preventDefault();
+ 
+    
+  // })
+
+
+  //this is to submit review  on click on the edit review mode
+  // $(document).on('click', '.edit-post', function (event) {
+  //   event.preventDefault();
+  //   var id = $(this).attr('id');
+  //   var name = $(this).attr('name');
+  //   $.ajax({
+  //     type: 'PUT',
+  //     url: '/review/edit/' + name + '/' + id,
+  //     success: function (response) {
+  //       console.log('edited');
+  //       window.location.reload();
+  //     }
+  //   })
+  // })
+
+
 
 });
 
