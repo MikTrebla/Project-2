@@ -50,6 +50,7 @@ $(document).ready(() => {
         );
         window.location.replace("/signin");
       } else {
+        
         window.location.href = "/user/" + user.screen_name;
       }
     });

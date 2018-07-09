@@ -4,7 +4,7 @@
     <form>
         <div class = 'userReview' id="{{User.dataValues.screen_name}}">{{User.dataValues.screen_name}}'s Review for {{dataValues.gameName}}</div>
         <div>
-            <input id="myTitle" class="myReview" placeholder=Title value={{~dataValues.title~}}>
+            <input id="myTitle" class="myReview" placeholder=Title value={{~dataValues.title}}>
         </div>
         <div id="big-box">
             <div class="stars">
@@ -25,7 +25,7 @@
 
         <div>
             <textarea id="myComment" class="myReview" placeholder="Review" rows="4">
-                {{~dataValues.body~}}
+                {{~dataValues.body}}
             </textarea>
         </div>
         <input type="submit" value="Edit" class="edit-review" id='{{dataValues.id}}'>
