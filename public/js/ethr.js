@@ -92,16 +92,18 @@ $(document).ready(() => {
           .val()
           .trim()
       };
-      $.get("/checklogin");
-      $.post(window.location.pathname, review).then(data => {
-        if (data === "Please signin") {
-          alert("You have to sign in to be able to submit reviews!");
-          window.location.href = "/signin";
+      $.get("/checklogin").then(results => {
+        if (results === 'user already logged') {
+          $.post(window.location.pathname, review).then(data => {
+              console.log("review added" + data);
+              window.location.reload();
+          });
         } else {
-          console.log("review added" + data);
-          window.location.reload();
+          alert('You must be logged in to submit a review! Redirecting to login page...')
+          window.location.href = '/signin'
         }
-      });
+      })
+      
     });
   };
 

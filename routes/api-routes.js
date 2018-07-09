@@ -253,9 +253,9 @@ module.exports = function (app) {
 
     app.get("/checklogin", (req, res) => {
         if (req.session.user) {
-            res.send(`Oh hi, it's ${req.session.user.name} again!`);
+            res.send('user already logged');
         } else {
-            res.redirect("/login");
+            res.redirect("/signin");
         }
     });
 
