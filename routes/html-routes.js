@@ -12,13 +12,6 @@ module.exports = function (app) {
         res.sendFile(path.join(__dirname, "../views/profile"));
     });
 
-    // app.get('/signin', (req, res) => {
-    //     res.sendFile(path.join(__dirname, "../views/signin"));
-    // });
-
-    // app.get('/register', (req, res) => {
-    //     res.sendFile(path.join(__dirname, "../views/register"));
-    // });
-
+    
 
 }

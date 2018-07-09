@@ -51,7 +51,6 @@ module.exports = function (app) {
             },
             include: [
                 db.Post
-                // { model: db.user2game, include: [{ model: db.game }] }
             ]
         }).then(data => {
             console.log(data);
@@ -85,7 +84,6 @@ module.exports = function (app) {
                         }
                     })
                     .then(response => {
-                        console.log(response);
                         return res.render("", response);
                     });
             } else {
@@ -199,17 +197,14 @@ module.exports = function (app) {
             },
             include: [
                 db.User
-                // { model: db.user2game, include: [{ model: db.game }] }
             ]
         }).then(results => {
-            console.log(results);
             res.render("review", results);
         });
     });
 
     app.get("/logout", function (req, res, next) {
         if (req.session) {
-            // delete session object
             req.session.destroy(function (err) {
                 if (err) {
                     return next(err);
@@ -240,7 +235,6 @@ module.exports = function (app) {
                 db.User
             ]
         }).then(result => {
-            console.log(result);
             res.render('edit', result)
         })
     })
@@ -259,7 +253,6 @@ module.exports = function (app) {
         })
     });
 
-    //////////check if user is logged into current session when attempting to submit reviews//////////
 
     app.get("/checklogin", (req, res) => {
         if (req.session.user) {
@@ -272,13 +265,6 @@ module.exports = function (app) {
     app.get("/api/getid/", function (req, res) {
         res.send(req.session);
     });
-    //////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // app.get('/logout', (req, res) => {
-
-    // });
-
-    // app.get('/logout', (req, res) => {
-    //     res.render('index')
-    // });
+   
 };

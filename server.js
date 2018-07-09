@@ -17,8 +17,8 @@ app.use(
 app.use(bodyParser.json());
 app.use(
   session({
-    secret: "whateverWeWant", //can be whatever you want it to set it to
-    resave: false, //typically should stay false
+    secret: "whateverWeWant", 
+    resave: false, 
     saveUninitialized: true, //
     cookie: {
       secure: "auto",
@@ -27,7 +27,6 @@ app.use(
   })
 );
 
-//Static directory
 app.use(express.static("public"));
 
 app.engine(
@@ -38,7 +37,6 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
-//Routes
 require("./routes/api-routes.js")(app);
 require("./routes/html-routes.js")(app);
 
