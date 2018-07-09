@@ -134,8 +134,8 @@ $(document).ready(() => {
   //this is to toggle edit review mode
   // $(document).on('click', '.toggle-edit', function (event) {
   //   event.preventDefault();
- 
-    
+
+
   // })
 
 

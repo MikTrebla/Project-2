@@ -139,11 +139,6 @@ module.exports = function (app) {
         });
     });
 
-    // app.get('/searchresults', (req, res) => {
-    //     res.render('search');
-    // })
-
-    // populate search results
     app.get("/search/:query", (req, res) => {
         console.log("hello");
         client
@@ -178,18 +173,9 @@ module.exports = function (app) {
             });
     });
 
-    // app.post("/game/search/:name/reviews", (req, res) => {
-    //   db.Post.create({
-    //     title: req.body.title,
-    //     rating: req.body.rating,
-    //     body: req.body.body,
-    //     gameName: req.params.name
-    //   }).then(results => {
-    //     res.send(results);
-    //   });
-    // });
+   
 
-    //to populate reviews per game
+
     app.post("/game/search/:name/reviews", (req, res) => {
         if (req.session.user) {
             db.Post.create({
