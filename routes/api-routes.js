@@ -173,7 +173,7 @@ module.exports = function (app) {
             });
     });
 
-   
+
 
 
     app.post("/game/search/:name/reviews", (req, res) => {
@@ -196,8 +196,13 @@ module.exports = function (app) {
         db.Post.findAll({
             where: {
                 gameName: req.params.name
-            }
+            },
+            include: [
+                db.User
+                // { model: db.user2game, include: [{ model: db.game }] }
+            ]
         }).then(results => {
+            console.log(results);
             res.render("review", results);
         });
     });
@@ -224,7 +229,18 @@ module.exports = function (app) {
         }).then(response => {
             res.json(response);
         })
-    })
+    });
+
+    app.put('/review/edit/:name/:id', (req, res) => {
+        db.Post.update({
+            where: {
+                id: req.params.id,
+                gameName: req.params.name
+            }
+        }).then(response => {
+            res.render('edit', response);
+        })
+    });
 
     //////////check if user is logged into current session when attempting to submit reviews//////////
 
