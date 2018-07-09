@@ -1,8 +1,4 @@
 $(document).ready(() => {
-  $('#profile').click(event => {
-    event.preventDefault();
-
-  })
 
   $("#register").click(event => {
     event.preventDefault();
