@@ -2,9 +2,9 @@
     <div class="wrapper">
         <div class="user">
             <h1 class="name">
-                <u>{{screen_name}}</u>
+                <u>{{dataValues.screen_name}}</u>
             </h1>
-            <img id="profilePic" src={{image}}>
+            <img id="profilePic" src={{dataValues.image}}>
             <hr>
 
             <div id="gameView">
@@ -21,14 +21,14 @@
 
         <div class="reviews">
             <h1>
-                <u>Reviews from {{screen_name}}</u>
+                <u>Reviews from {{dataValues.screen_name}}</u>
             </h1>
             {{#each Posts}}
             <h2>Title : {{title}}</h2>
             <p>Review : {{body}}</p>
             <br>
-            <button class="delete-post" data-id="{{this.id}}">Delete Review</button>
-            <button class="edit-post" data-id="{{this.id}}">Edit Review</button>
+            <button id='delete-post' data-id="{{id}}">Delete Review</button>
+            <button id="edit-post" data-id="{{id}}">Edit Review</button>
             {{/each}}
         </div>
 

@@ -99,6 +99,7 @@ $(document).ready(() => {
           window.location.href = "/signin";
         } else {
           console.log("review added" + data);
+          window.location.reload();
         }
       });
     });
@@ -114,8 +115,12 @@ $(document).ready(() => {
     });
   });
 
+  $(document).on('click', '.delete-post', event => {
+    event.preventDefault();
+    var id = $(this).attr('id');
+    console.log(id);
+  })
 
-  
 });
 
 loggedIn = userId => {
