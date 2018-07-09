@@ -15,21 +15,20 @@
         <h2>Community Game Reviews</h2>
 
         <div class="slideshow-container">
+
             <div class="slideshow-container">
 
+                    {{#each this}}
 
                 <div class="mySlides fade">
-                    <p>"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
-                        atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,
-                        similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum
-                        quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi
-                        optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda
-                        est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus
-                        saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic
-                        tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis
-                        doloribus asperiores repellat."</p>
+                    <h1>Game: {{gameName}}</h1>
+                    <h2>{{title}}</h2>
+                    <h4>Rating: {{rating}}<i class="fas fa-star"></i></h4>
+                    <p>{{body}}</p>
                 </div>
+                    {{/each}}
 
+                {{!--
                 <div class="mySlides fade">
                     <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
                         et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -48,7 +47,7 @@
                         ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum
                         iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui
                         dolorem eum fugiat quo voluptas nulla pariatur?"</p>
-                </div>
+                </div> --}}
 
 
             </div>

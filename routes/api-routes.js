@@ -7,19 +7,10 @@ var user = require("../models/user.js");
 
 module.exports = function (app) {
     app.get("/", (req, res) => {
-        client
-            .games({
-                fields: "name", // Return all fields
-                limit: 5, // Limit to 5 results
-                offset: 15, // Index offset for results
-                search: "halo"
-            }, ["name", "release_dates.date", "rating", "cover"])
-            .then(response => {
-                res.render("index");
-            })
-            .catch(error => {
-                throw error;
-            });
+        db.Post.findAll().then(results => {
+            console.log(results);
+            res.render('index', results);
+        })
     });
 
     app.get("/game/search/:gameName", (req, res) => {
@@ -242,7 +233,7 @@ module.exports = function (app) {
         db.Post.destroy({
             where: {
                 id: req.params.id,
-                gameName : req.params.name
+                gameName: req.params.name
             }
         }).then(response => {
             res.json(response);

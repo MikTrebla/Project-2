@@ -99,7 +99,7 @@ $(document).ready(() => {
             window.location.reload();
           });
         } else {
-          alert('You must be logged in to submit a review! Redirecting to login page...')
+          alert('You must be logged in to submit a review! Redirecting to the login page...')
           window.location.href = '/signin'
         }
       })
