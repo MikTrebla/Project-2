@@ -14,12 +14,12 @@
 
 #your-review {
     text-align: center;
+    min-height: 500px;
 }
 
 #their-re {
     display: grid;
     grid-template-columns: 20% 80%;
-    overflow: scroll;
     background-color: rgb(20, 20, 20); 
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -71,7 +71,6 @@
 #r-title {
     font-weight: bold;
     font-size: 130%;
-    font-family: 'Times New Roman', Times, serif;
 }
 
 #r-score {
