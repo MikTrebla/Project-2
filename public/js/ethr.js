@@ -119,7 +119,6 @@ $(document).ready(() => {
     event.preventDefault();
     var id = $(this).attr('id');
     var name = $(this).attr('name');
-    console.log(id);
     $.ajax({
       type: 'DELETE',
       url: '/review/delete/' + name + '/' + id,
@@ -128,9 +127,6 @@ $(document).ready(() => {
         window.location.reload();
       }
     })
-    // $.delete('/game/search/' + game + '/reviews').then(data => {
-    //   window.location.reload();
-    // });
   })
 
 });
