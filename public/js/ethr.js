@@ -1,7 +1,7 @@
 $(document).ready(() => {
   $('#profile').click(event => {
     event.preventDefault();
-    
+
   })
 
   $("#register").click(event => {
@@ -115,18 +115,21 @@ $(document).ready(() => {
     event.preventDefault();
     var id = $(this).attr('id');
     var name = $(this).attr('name');
-    if (results === 'user already logged') {
-      $.ajax({
-        type: 'DELETE',
-        url: '/review/delete/' + name + '/' + id,
-        success: function (response) {
-          window.location.reload();
-        }
-      });
-    } else {
-      alert('You must be logged in to edit a review! Redirecting to the login page...')
-      window.location.href = '/signin'
-    }
+    $.get("/checklogin").then(results => {
+
+      if (results === 'user already logged') {
+        $.ajax({
+          type: 'DELETE',
+          url: '/review/delete/' + name + '/' + id,
+          success: function (response) {
+            window.location.reload();
+          }
+        });
+      } else {
+        alert('You must be logged in to edit a review! Redirecting to the login page...')
+        window.location.href = '/signin'
+      }
+    })
   });
 
 
@@ -159,16 +162,19 @@ $(document).ready(() => {
   $(document).on('click', '.edit-post', function (event) {
     event.preventDefault();
     var id = $(this).attr('id')
-    if (results === 'user already logged') {
+    $.get("/checklogin").then(results => {
 
-      $.get('/review/edit/' + id).then(result => {
-        window.location.href = "/review/edit/" + id;
-      })
-    } else {
-      alert('You must be logged in to edit a review! Redirecting to the login page...')
-      window.location.href = '/signin'
-    }
+      if (results === 'user already logged') {
 
+        $.get('/review/edit/' + id).then(result => {
+          window.location.href = "/review/edit/" + id;
+        })
+      } else {
+        alert('You must be logged in to edit a review! Redirecting to the login page...')
+        window.location.href = '/signin'
+      }
+
+    })
   })
 
 
@@ -181,4 +187,3 @@ loggedIn = userId => {
   });
 };
 loggedIn();
-
