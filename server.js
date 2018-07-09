@@ -44,7 +44,7 @@ require("./routes/html-routes.js")(app);
 
 db.sequelize
   .sync({
-    force: true
+    force: false
   })
   .then(function () {
     app.listen(PORT, function () {
