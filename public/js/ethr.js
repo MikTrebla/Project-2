@@ -177,6 +177,20 @@ $(document).ready(() => {
     })
   })
 
+  $(document).on('click', '#profile', (event)=>{
+    event.preventDefault();
+    $.get("/checklogin").then(results =>{
+      if(results === 'user already logged'){
+        $.get('/api/getid', data => {
+          userId = data.user;
+          window.location.href = ('/user/' + userId.screen_name);
+        })  
+      }else{
+        window.location.href = '/signin'
+      }
+    })
+  });
+
 
 });
 
