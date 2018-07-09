@@ -115,10 +115,22 @@ $(document).ready(() => {
     });
   });
 
-  $(document).on('click', '.delete-post', event => {
+  $(document).on('click', '.delete-post', function (event) {
     event.preventDefault();
     var id = $(this).attr('id');
+    var name = $(this).attr('name');
     console.log(id);
+    $.ajax({
+      type: 'DELETE',
+      url: '/game/delete/' + name + '/' + id,
+      success: function (response) {
+        console.log('deleted');
+        window.location.reload();
+      }
+    })
+    // $.delete('/game/search/' + game + '/reviews').then(data => {
+    //   window.location.reload();
+    // });
   })
 
 });

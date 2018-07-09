@@ -24,11 +24,12 @@
                 <u>Reviews from {{dataValues.screen_name}}</u>
             </h1>
             {{#each Posts}}
-            <h2>Title : {{title}}</h2>
+            <h2>Review for : {{gameName}}</h2>
+            <h3>Title : {{title}}</h2>
             <p>Review : {{body}}</p>
             <br>
-            <button id='delete-post' data-id="{{id}}">Delete Review</button>
-            <button id="edit-post" data-id="{{id}}">Edit Review</button>
+            <button class='delete-post' id="{{id}}" name='{{gameName}}'>Delete Review</button>
+            <button class="edit-post" id="{{id}}">Edit Review</button>
             {{/each}}
         </div>
 

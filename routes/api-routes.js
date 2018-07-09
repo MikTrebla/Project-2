@@ -238,6 +238,16 @@ module.exports = function (app) {
         }
     });
 
+    app.delete('/game/delete/:name/:id', (req, res) => {
+        db.Post.destroy({
+            where: {
+                id: req.params.id,
+                gameName : req.params.name
+            }
+        }).then(response => {
+            res.json(response);
+        })
+    })
 
     //////////check if user is logged into current session when attempting to submit reviews//////////
 
