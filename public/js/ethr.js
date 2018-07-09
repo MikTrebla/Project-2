@@ -140,23 +140,43 @@ $(document).ready(() => {
 
 
   //this is to submit review  on click on the edit review mode
-  $(document).on('click', '.edit-post', function (event) {
+  $(document).on('click', '.edit-review', function (event) {
     event.preventDefault();
-    var review = {
-      id : $(this).attr('id'),
-      name : $(this).attr('name')
-      // rating :$(this).
+    var newReview = {
+      title: $("#myTitle").val().trim(),
+      rating: $("input[name=star]:checked").val(),
+      body: $("#myComment").val().trim(),
+      id: $(this).attr('id'),
+      screen_name: $('.userReview').attr('id')
     }
-    $.ajax({
-      type: 'PUT',
-      url: '/review/edit/' + name + '/' + id,
-      success: function (response) {
-        console.log('edited');
-        window.location.reload();
+    $.get("/checklogin").then(results => {
+      if (results === 'user already logged') {
+        console.log(results);
+        $.ajax({
+          type: 'PUT',
+          data: newReview,
+          url: '/submitreview/edit/' + newReview.id,
+          success: function (response) {
+            console.log(response);
+            window.location.href = '/user/' + newReview.screen_name
+          }
+        })
+      } else {
+        alert('You must be logged in to edit a review! Redirecting to the login page...')
+        window.location.href = '/signin'
       }
     })
   })
 
+  $(document).on('click', '.edit-post', function (event) {
+    event.preventDefault();
+    var id = $(this).attr('id')
+    $.get('/review/edit/' + id).then(result => {
+      window.location.href = "/review/edit/" + id;
+    })
+
+
+  })
 
 
 });
