@@ -1,7 +1,7 @@
 const db = require("../models/index.js");
 const encrypt = require("../encryption.js");
 const igdb = require("igdb-api-node").default;
-const client = igdb("1ef55fd89628c4844a334b3bee9b4194");
+const client = igdb("1d706ee81a194c98319d627fd48b6673");
 
 var user = require("../models/user.js");
 
